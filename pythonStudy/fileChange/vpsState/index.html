@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>vps服务器状态</title>
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/layui.css">
+    <script src="js/jquery-2.1.1.min.js"></script>
+    <script src="js/layui-v2.5.4/layui/layui.js"></script>
+    <script src="js/vue.js"></script>
+</head>
+<body>
+    <div id='index'>
+        <!-- <div class='top'>
+            vps服务器状态
+        </div> -->
+        
+        <ul class="layui-nav layui-bg-cyan" lay-filter="">
+            <li class="layui-nav-item layui-this"><a @click='topSwitch("search")' href="#">Search</a></li>
+            <li class="layui-nav-item "><a @click='topSwitch("verify")' href="#">Verify</a></li>
+            <li class="layui-nav-item"><a @click='topSwitch("active")' href="#">Active</a></li>
+        </ul>
+        
+        <div  v-show='allSH.searchSH' class="search">
+
+
+            <table class="layui-table center">
+                <thead >
+                    <tr class="thead_center">
+                        <th>序号</th>
+                        <th>服务器名称</th>
+                        <th>CPU使用率</th>
+                        <th>内存使用率</th>
+                        <th>Spider程序运行数量</th>
+                        <th>刷新时间</th>
+                    </tr> 
+                </thead>
+    
+                <tbody>
+                    <tr v-for='(item,i) in searchList'>
+                        <td>{{i+1}}</td>
+                        <td>{{item.computername}}</td>
+
+                        <td>
+                            {{item.cpustate}}
+                            <div class="layui-progress">
+                                <div class="layui-progress-bar" :lay-percent="item.cpustate+'%'"></div>
+                            </div>
+                        </td>
+
+                        <td>
+                            {{item.memorystate[0]}}({{item.memorystate[1]}}/{{item.memorystate[2]}})
+                            <div class="layui-progress">
+                                <div class="layui-progress-bar" :lay-percent="item.memorystate[0]+'%'"></div>
+                            </div>
+                        </td>
+                        <td>{{item.process}}</td>
+                        <td>{{item.time}}</td>
+                        
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <div v-show='allSH.verifySH' class="search">
+                <table class="layui-table center">
+                        <thead >
+                            <tr class="thead_center">
+                                <th>序号</th>
+                                <th>服务器名称</th>
+                                <th>CPU使用率</th>
+                                <th>内存使用率</th>
+                                <th>Spider程序运行数量</th>
+                                <th>刷新时间</th>
+                            </tr> 
+                        </thead>
+            
+                        <tbody>
+                            <tr v-for='(item,i) in verifyList'>
+                                <td>{{i+1}}</td>
+                                <td>{{item.computername}}</td>
+        
+                                <td>
+                                    {{item.cpustate}}
+                                    <div class="layui-progress">
+                                        <div class="layui-progress-bar" :lay-percent="item.cpustate+'%'"></div>
+                                    </div>
+                                </td>
+        
+                                <td>
+                                    {{item.memorystate[0]}}({{item.memorystate[1]}}/{{item.memorystate[2]}})
+                                    <div class="layui-progress">
+                                        <div class="layui-progress-bar" :lay-percent="item.memorystate[0]+'%'"></div>
+                                    </div>
+                                </td>
+                                <td>{{item.process}}</td>
+                                <td>{{item.time}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+
+        <div v-show='allSH.activeSH' class="search">
+                <table class="layui-table center">
+                        <thead >
+                            <tr class="thead_center">
+                                <th>序号</th>
+                                <th>服务器名称</th>
+                                <th>CPU使用率</th>
+                                <th>内存使用率</th>
+                                <th>Spider程序运行数量</th>
+                                <th>刷新时间</th>
+                            </tr> 
+                        </thead>
+            
+                        <tbody>
+                            <tr v-for='(item,i) in activeList'>
+                                <td>{{i+1}}</td>
+                                <td>{{item.computername}}</td>
+        
+                                <td>
+                                    {{item.cpustate}}
+                                    <div class="layui-progress">
+                                        <div class="layui-progress-bar" :lay-percent="item.cpustate+'%'"></div>
+                                    </div>
+                                </td>
+        
+                                <td>
+                                    {{item.memorystate[0]}}({{item.memorystate[1]}}/{{item.memorystate[2]}})
+                                    <div class="layui-progress">
+                                        <div class="layui-progress-bar" :lay-percent="item.memorystate[0]+'%'"></div>
+                                    </div>
+                                </td>
+                                <td>{{item.process}}</td>
+                                <td>{{item.time}}</td>
+                                
+                            </tr>
+                        </tbody>
+                    </table>
+        </div>
+
+    </div>
+    
+    <script src="js/index.js"></script>
+    
+</body>
+</html>
