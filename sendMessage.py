@@ -1,7 +1,7 @@
 import socket
 import psutil
 import time
-
+import os
 # 发送数据的函数
 
 
@@ -12,6 +12,7 @@ def send(addr):
         'cpustate': get_cpu_state(),
         'memorystate': get_memory_state(),
         'computername': get_computer_name(),
+        'modifydate':get_modify_date()
     }
 
     # 创建套接字
@@ -52,7 +53,23 @@ def get_memory_state():
 def get_computer_name():
     return socket.gethostname()
 
+# 获得程序修改时间
+def get_modify_date():
+    try:
+        statinfo = os.stat("d://DirectSpider/Spider.exe")
+        # t = time.localtime(statinfo.st_mtime)
+        timeStamp = int(statinfo.st_mtime)
+        # print(timeStamp)
+        timeArray = time.localtime(timeStamp)
+        otherStyleTime = time.strftime("%Y-%m-%d %H:%M:%S", timeArray)
+        return otherStyleTime
+    except:
+        print("获取时间失败")
+        return "timeError"
+
+
 def main():
+    get_modify_date()
     # 声明发送地址
     addr = ('106.15.53.80', 8989)
     while True:
@@ -64,3 +81,4 @@ def main():
         time.sleep(10)
 if __name__ == '__main__':
     main()
+    get_modify_date()
