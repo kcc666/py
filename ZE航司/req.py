@@ -1,3 +1,4 @@
+#codding = utf8
 import requests
 
 
