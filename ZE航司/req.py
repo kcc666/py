@@ -22,7 +22,7 @@ import requests,json,os
 #     print(r.status_code)
 #     print(r.headers)
 
-def get_data():
+def get_data(go,to,date):
     #请求数据
     url = "https://www.eastarjet.com/json/dataService"
 
@@ -37,19 +37,20 @@ def get_data():
         ,"Referer": "https://www.eastarjet.com/newstar/PGWHC00001"
         ,"Accept-Encoding": "gzip, deflate, br"
         ,"Accept-Language": "zh-CN,zh;q=0.9"
-        ,"Cookie": "JSESSIONID=DD5B3D60E8B9C2772F2DA2DD9E05C8CC.WAS_93.WAS_93"
+        ,"Cookie": "JSESSIONID=B40FCD972335C4FC1F9CAA5DC3B2A1C9.WAS_93.WAS_93"
         ,"Content-Length": "1610"
     }
 
-    cf = "ICN"
-    dd = "TPE"
-    date = "20191030"
+    cf = go
+    dd = to
+    date = date
     data = r'{"id": 11, "method": "DataService.service", "params": [{"javaClass": "com.jein.framework.connectivity.parameter.RequestParameter", "requestUniqueCode": "PGWHC00001", "requestExecuteType": "BIZ", "DBTransaction": false, "sourceName": null, "sourceExtension": null, "functionName": "DTWBA00022", "panelId": null, "methodType": null, "inParameters": {"javaClass": "java.util.List", "list": [{"javaClass": "com.jein.framework.connectivity.parameter.InParameter", "paramName": "flightSearch", "ioType": "IN", "structureType": "FIELD", "data": {"javaClass": "java.util.List", "list": [{"map": {"flightSearch": "{\"viewType\":\"B\",\"fly_type\":\"2\",\"person1\":\"1\",\"person2\":\"0\",\"person3\":\"0\",\"residentCountry\":\"KR\",\"currency\":\"\",\"promotion_cd\":\"\",\"flySection\":[{\"departure_cd\":\"ICN\",\"departure_txt\":\"\",\"arrival_cd\":\"TPE\",\"arrival_txt\":\"\",\"departure_date_cd\":\"20191002\",\"departure_date_txt\":\"\"}],\"recaptchaToken\":\"03AOLTBLR0-StEIwDrFmDfMK0JXuxTfkf2Gca4rLjvwEM7bPFoCfI4QeU1MDPSDik7UAvEZOadnzzkcZc1NmDo-ZoEy_VX46Y5iebUE05GQJzsGIH-HZHbtrnvMqjNjUI-7k19Ojn5n5LcqplZT8R4-5Ys08o7I5fwRA0ri9Tg7ACVFRnb-U1QDaNDYaCuZW8oDwxt1RptMaiEplaPHUdFybsW_km-9ksugcNZcE694-0yfS8Muuig1ivpsodqBu-44mbQesiNGxLmuKujo8GP5nO4OzA5z5AmVpEY_q4BVsP767VAvhfb0vkEue2C7PpVRuCyncxLo01Rlu7oxPe_YUlWWXyCLhYn2_c6PXcIipB-PwUQnmLX1qRLzekvK5H-2B39m91f1YSKNciU4octoKNIXk7-ZLKpJGtlm0jXTjYe5GSJ2DFIWL0QWhnAXHr5uZtXpqVzcFyRjeXCRpqxgFVc8I-qkOxuyA\"}"}, "javaClass": "java.util.Map"}]}}]}, "filterParameter": {"javaClass": "java.util.Map", "map": {}}}]}'.replace("ICN",cf).replace("TPE",dd).replace("20191002",date)
     r = requests.post(url,headers=headers,data=data,verify=False)
     # print(r.status_code)
     r_text = r.text
     if (len(r_text) < 1000):
         print("没有数据")
+        print(r.text)
     else:
         os.system("cls")
         dct_text = json.loads(r_text)
@@ -84,4 +85,12 @@ def get_data():
             print("特价票价:",fly_tj)
             print("*"*30)
 
-get_data()
+print("请等待")
+get_data("ICN","NRT","20191016")
+print("抓取完毕")
+# def get_info():
+#     go_city = input("请输入出发地机场码\n")
+#     to_city = input("请输入到达地机场码\n")
+#     go_date = input("请输入出发日期\n")
+# get_data("HKG","ICN","20191031")
+
