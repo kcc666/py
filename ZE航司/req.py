@@ -2,25 +2,25 @@
 import requests,json,os
 
 
-# def get_index():
-#     # 请求主页
-#     url = "https://www.eastarjet.com/newstar/PGWHC00001"
-#     headers = {
-#         "Host": "www.eastarjet.com"
-#         ,"Connection": "keep-alive"
-#         ,"Upgrade-Insecure-Requests": "1"
-#         ,"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
-#         ,"Sec-Fetch-Mode": "navigate"
-#         ,"Sec-Fetch-User": "?1"
-#         ,"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
-#         ,"Sec-Fetch-Site": "none"
-#         ,"Accept-Encoding": "gzip, deflate, br"
-#         ,"Accept-Language": "zh-CN,zh;q=0.9"
-#     }
+def get_index():
+    # 请求主页
+    url = "https://www.eastarjet.com/newstar/PGWHC00001"
+    headers = {
+        "Host": "www.eastarjet.com"
+        ,"Connection": "keep-alive"
+        ,"Upgrade-Insecure-Requests": "1"
+        ,"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.90 Safari/537.36"
+        ,"Sec-Fetch-Mode": "navigate"
+        ,"Sec-Fetch-User": "?1"
+        ,"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
+        ,"Sec-Fetch-Site": "none"
+        ,"Accept-Encoding": "gzip, deflate, br"
+        ,"Accept-Language": "zh-CN,zh;q=0.9"
+    }
 
-#     r = requests.get(url,headers=headers)
-#     print(r.status_code)
-#     print(r.headers)
+    r = requests.get(url,headers=headers)
+    print(r.status_code)
+    print(r.headers)
 
 def get_data(go,to,date):
     #请求数据
@@ -37,7 +37,7 @@ def get_data(go,to,date):
         ,"Referer": "https://www.eastarjet.com/newstar/PGWHC00001"
         ,"Accept-Encoding": "gzip, deflate, br"
         ,"Accept-Language": "zh-CN,zh;q=0.9"
-        ,"Cookie": "JSESSIONID=B40FCD972335C4FC1F9CAA5DC3B2A1C9.WAS_93.WAS_93"
+        ,"Cookie": "JSESSIONID=79C861E0D9F020571928762BE70FE608.WAS_93.WAS_93"
         ,"Content-Length": "1610"
     }
 
@@ -85,6 +85,8 @@ def get_data(go,to,date):
             print("特价票价:",fly_tj)
             print("*"*30)
 
+
+# get_index()
 print("请等待")
 get_data("ICN","NRT","20191016")
 print("抓取完毕")
