@@ -37,7 +37,7 @@ def get_data(go,to,date):
         ,"Referer": "https://www.eastarjet.com/newstar/PGWHC00001"
         ,"Accept-Encoding": "gzip, deflate, br"
         ,"Accept-Language": "zh-CN,zh;q=0.9"
-        ,"Cookie": "JSESSIONID=79C861E0D9F020571928762BE70FE608.WAS_93.WAS_93"
+        ,"Cookie": "JSESSIONID=CCC304616654BBD504244309309BD647.WAS_93.WAS_93"
         ,"Content-Length": "1610"
     }
 
@@ -88,7 +88,7 @@ def get_data(go,to,date):
 
 # get_index()
 print("请等待")
-get_data("ICN","NRT","20191016")
+get_data("ICN","NRT","20191017")
 print("抓取完毕")
 # def get_info():
 #     go_city = input("请输入出发地机场码\n")
