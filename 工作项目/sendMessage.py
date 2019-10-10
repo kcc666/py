@@ -12,9 +12,9 @@ def send(addr):
         'cpustate': get_cpu_state(),
         'memorystate': get_memory_state(),
         'computername': get_computer_name(),
-        'modifydate':get_modify_date()
+        'modifydate':get_modify_date(),
+        'version':get_version()
     }
-
     # 创建套接字
     udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     # 发送数据
@@ -67,9 +67,13 @@ def get_modify_date():
         print("获取时间失败")
         return "timeError"
 
+# 获得当前版本号
+def get_version():
+    # with open("‪D:/DirectSpider/VersionDate.txt","r")as f:
+    with open("D:/DirectSpider/Version.txt","r")as f:
+        return f.read()
 
 def main():
-    get_modify_date()
     # 声明发送地址
     addr = ('106.15.53.80', 8989)
     while True:
@@ -81,4 +85,4 @@ def main():
         time.sleep(10)
 if __name__ == '__main__':
     main()
-    get_modify_date()
+    # print(get_version())

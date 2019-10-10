@@ -1,4 +1,3 @@
-#codding = utf8
 import requests,json,os,re,time
 
 #请求JS_ID
@@ -21,6 +20,7 @@ def get_index():
     try:
         print("正在请求JSID...")
         r = requests.get(url,headers=headers)
+        print(r.headers)
         set_cookie = r.headers["Set-Cookie"]
         js_id = re.findall('JSESSIONID.*?;',set_cookie)[0]
         js_id = js_id.replace(";",'')
@@ -112,7 +112,8 @@ def parse_data(data):
 
 #主函数
 def main():
-    #请求JS_ID
+    # get_index()
+    # 请求JS_ID
     js_id = get_index()
     if js_id == "f":
         return
@@ -138,17 +139,11 @@ def main():
                 f_count+=1
             else:
                 return
-
+   
 
     
 
 
 
 if __name__ == "__main__":
-    os.system("cls")
-    t1 = time.time()
     main()
-    t2 = time.time()
-    print(int(t2-t1))
-
-    

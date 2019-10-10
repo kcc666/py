@@ -9,6 +9,8 @@ import shutil
 import sendMessage
 import threading
 import subprocess
+
+
 #服务器地址
 server_path = "http://106.15.53.80:56789/"
 #本地路径
