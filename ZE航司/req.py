@@ -32,7 +32,7 @@ def get_index():
         return "f"
     
 #爬数
-def get_data(go,to,date,jsid):
+def get_data(go,to,date,jsid,adult_num):
     #抓数
     url = "https://www.eastarjet.com/json/dataService"
 
@@ -53,7 +53,7 @@ def get_data(go,to,date,jsid):
     
     try:
         print("正在抓数...")
-        data = r'{"id": 11, "method": "DataService.service", "params": [{"javaClass": "com.jein.framework.connectivity.parameter.RequestParameter", "requestUniqueCode": "PGWHC00001", "requestExecuteType": "BIZ", "DBTransaction": false, "sourceName": null, "sourceExtension": null, "functionName": "DTWBA00022", "panelId": null, "methodType": null, "inParameters": {"javaClass": "java.util.List", "list": [{"javaClass": "com.jein.framework.connectivity.parameter.InParameter", "paramName": "flightSearch", "ioType": "IN", "structureType": "FIELD", "data": {"javaClass": "java.util.List", "list": [{"map": {"flightSearch": "{\"viewType\":\"B\",\"fly_type\":\"2\",\"person1\":\"1\",\"person2\":\"0\",\"person3\":\"0\",\"residentCountry\":\"KR\",\"currency\":\"\",\"promotion_cd\":\"\",\"flySection\":[{\"departure_cd\":\"ICN\",\"departure_txt\":\"\",\"arrival_cd\":\"TPE\",\"arrival_txt\":\"\",\"departure_date_cd\":\"20191002\",\"departure_date_txt\":\"\"}],\"recaptchaToken\":\"03AOLTBLR0-StEIwDrFmDfMK0JXuxTfkf2Gca4rLjvwEM7bPFoCfI4QeU1MDPSDik7UAvEZOadnzzkcZc1NmDo-ZoEy_VX46Y5iebUE05GQJzsGIH-HZHbtrnvMqjNjUI-7k19Ojn5n5LcqplZT8R4-5Ys08o7I5fwRA0ri9Tg7ACVFRnb-U1QDaNDYaCuZW8oDwxt1RptMaiEplaPHUdFybsW_km-9ksugcNZcE694-0yfS8Muuig1ivpsodqBu-44mbQesiNGxLmuKujo8GP5nO4OzA5z5AmVpEY_q4BVsP767VAvhfb0vkEue2C7PpVRuCyncxLo01Rlu7oxPe_YUlWWXyCLhYn2_c6PXcIipB-PwUQnmLX1qRLzekvK5H-2B39m91f1YSKNciU4octoKNIXk7-ZLKpJGtlm0jXTjYe5GSJ2DFIWL0QWhnAXHr5uZtXpqVzcFyRjeXCRpqxgFVc8I-qkOxuyA\"}"}, "javaClass": "java.util.Map"}]}}]}, "filterParameter": {"javaClass": "java.util.Map", "map": {}}}]}'.replace("ICN",go).replace("TPE",to).replace("20191002",date)
+        data = r'{"id": 11, "method": "DataService.service", "params": [{"javaClass": "com.jein.framework.connectivity.parameter.RequestParameter", "requestUniqueCode": "PGWHC00001", "requestExecuteType": "BIZ", "DBTransaction": false, "sourceName": null, "sourceExtension": null, "functionName": "DTWBA00022", "panelId": null, "methodType": null, "inParameters": {"javaClass": "java.util.List", "list": [{"javaClass": "com.jein.framework.connectivity.parameter.InParameter", "paramName": "flightSearch", "ioType": "IN", "structureType": "FIELD", "data": {"javaClass": "java.util.List", "list": [{"map": {"flightSearch": "{\"viewType\":\"B\",\"fly_type\":\"2\",\"person1\":\"num\",\"person2\":\"0\",\"person3\":\"0\",\"residentCountry\":\"KR\",\"currency\":\"\",\"promotion_cd\":\"\",\"flySection\":[{\"departure_cd\":\"ICN\",\"departure_txt\":\"\",\"arrival_cd\":\"TPE\",\"arrival_txt\":\"\",\"departure_date_cd\":\"20191002\",\"departure_date_txt\":\"\"}],\"recaptchaToken\":\"03AOLTBLR0-StEIwDrFmDfMK0JXuxTfkf2Gca4rLjvwEM7bPFoCfI4QeU1MDPSDik7UAvEZOadnzzkcZc1NmDo-ZoEy_VX46Y5iebUE05GQJzsGIH-HZHbtrnvMqjNjUI-7k19Ojn5n5LcqplZT8R4-5Ys08o7I5fwRA0ri9Tg7ACVFRnb-U1QDaNDYaCuZW8oDwxt1RptMaiEplaPHUdFybsW_km-9ksugcNZcE694-0yfS8Muuig1ivpsodqBu-44mbQesiNGxLmuKujo8GP5nO4OzA5z5AmVpEY_q4BVsP767VAvhfb0vkEue2C7PpVRuCyncxLo01Rlu7oxPe_YUlWWXyCLhYn2_c6PXcIipB-PwUQnmLX1qRLzekvK5H-2B39m91f1YSKNciU4octoKNIXk7-ZLKpJGtlm0jXTjYe5GSJ2DFIWL0QWhnAXHr5uZtXpqVzcFyRjeXCRpqxgFVc8I-qkOxuyA\"}"}, "javaClass": "java.util.Map"}]}}]}, "filterParameter": {"javaClass": "java.util.Map", "map": {}}}]}'.replace("ICN",go).replace("TPE",to).replace("20191002",date).replace("num",str(adult_num))
         r = requests.post(url,headers=headers,data=data,verify=False)
         r_text = r.text
         print("已抓取数据待分析")
@@ -127,7 +127,7 @@ def main():
             f_count = 0
         else: #计数器小于5,开始爬数,如果成功则让计数器归零,如果失败则让计数器+1
 
-            gd = get_data("NRT","ICN","20191118",js_id)
+            gd = get_data("NRT","ICN","20191118",js_id,adult_num=5)
             if gd == "f":
                 return
 
