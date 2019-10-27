@@ -10,6 +10,9 @@ class Twayair:
         self._csrf = ""
         self.bt = ""
         
+        #代理ip
+        self.proxy = {}
+
         #出发到达日期(send_parameter方法里使用)
         self.go = "CJU"
         self.to = "GMP"
@@ -21,6 +24,8 @@ class Twayair:
         #回来数据的页面
         self.data_all = ""
 
+        #获取代理IP
+        self.get_proxy()
         #拿请求参数
         self.get_parameter()
         #发送请求参数
@@ -28,6 +33,36 @@ class Twayair:
         #拿数据
         self.get_data()
 
+    def get_proxy(self):
+        #-----------------------------------------------------------------
+        #请求报文
+        url = "http://139.224.252.126:8066/api/ProxyIP/getip"
+        parameter = {
+            "GetNew":"1"
+            ,"Operator":"100026"
+            ,"InvalidAirlinesID":"616"
+            ,"extractCount":"1"
+            ,"protocolType":"11"
+        }
+        #-----------------------------------------------------------------
+        #发送请求
+        r = requests.get(url=url,params=parameter)
+        r_text = r.text #响应内容
+        status_code = r.status_code #状态码
+        #-----------------------------------------------------------------
+        #处理请求
+        if status_code != 200 and r_text =="\"[]\"":
+            print("获取代理IP失败:",status_code)
+        else:
+            print("获取ip成功",status_code)
+            print(r_text)
+            re_ip = re.findall("\d+.\d+.\d+.\d+:\d+",r_text)[0]
+            print(re_ip)
+            self.proxy = {
+                "http":"http://"+re_ip,
+                "https":"https://"+re_ip,
+            }
+        #-----------------------------------------------------------------
 
     def get_parameter(self):
         '''请求主页'''
@@ -49,7 +84,7 @@ class Twayair:
         }
         #---------------------------------------------------------------
         #发送请求
-        r = requests.get(url=url,headers=headers) 
+        r = requests.get(url=url,headers=headers,proxies=self.proxy) 
         r_text = r.text #响应内容
         status_code = r.status_code #状态码
         r_text_len = len(r_text) #响应内容长度
@@ -58,6 +93,8 @@ class Twayair:
         if r.status_code != 200:
             print("请求主页失败:",status_code)
             print("主页响应长度",r_text_len)
+            with open("index_error.html","w",encoding="utf8")as f:
+                f.write(r_text)
         else:
             print("请求主页成功:",status_code)
             print("主页响应长度",r_text_len)
@@ -111,7 +148,7 @@ class Twayair:
         data = "bookingTicket=<bt>&tripType=OW&bookingType=HI&promoCodeDetails.promoCode=&validPromoCode=&availabilitySearches%5B0%5D.depAirport=<chufa>&availabilitySearches%5B0%5D.arrAirport=<daoda>&availabilitySearches%5B0%5D.flightDate=<riqi>&availabilitySearches%5B1%5D.depAirport=&availabilitySearches%5B1%5D.arrAirport=&availabilitySearches%5B1%5D.flightDate=&availabilitySearches%5B2%5D.depAirport=&availabilitySearches%5B2%5D.arrAirport=&availabilitySearches%5B2%5D.flightDate=&availabilitySearches%5B3%5D.depAirport=&availabilitySearches%5B3%5D.arrAirport=&availabilitySearches%5B3%5D.flightDate=&availabilitySearches%5B4%5D.depAirport=&availabilitySearches%5B4%5D.arrAirport=&availabilitySearches%5B4%5D.flightDate=&paxCountDetails%5B0%5D.paxCount=1&paxCountDetails%5B1%5D.paxCount=0&paxCountDetails%5B2%5D.paxCount=0&availabilitySearches%5B0%5D.depAirportName=&availabilitySearches%5B0%5D.arrAirportName=&availabilitySearches%5B1%5D.depAirportName=&availabilitySearches%5B1%5D.arrAirportName=&availabilitySearches%5B2%5D.depAirportName=&availabilitySearches%5B2%5D.arrAirportName=&availabilitySearches%5B3%5D.depAirportName=&availabilitySearches%5B3%5D.arrAirportName=&availabilitySearches%5B4%5D.depAirportName=&availabilitySearches%5B4%5D.arrAirportName=&_csrf=<csrf>&pax=1&pax=0&pax=0&deptAirportCode=<chufa>&arriAirportCode=<daoda>&schedule=<riqi>".replace("<bt>",self.bt).replace("<chufa>",self.go).replace("<daoda>",self.to).replace("<riqi>",self.date).replace("<csrf>",self._csrf)
         #-----------------------------------------------------------------
         #发送请求
-        r = requests.post(url=url,headers=headers,data=data)
+        r = requests.post(url=url,headers=headers,data=data,proxies=self.proxy)
         r_text = r.text #响应内容
         r_text_len = len(r_text) #响应长度
         status_code = r.status_code #状态码
@@ -155,7 +192,7 @@ class Twayair:
         data = "_csrf="+self._csrf
         #-----------------------------------------------------------------
         #发送请求
-        r = requests.post(url=url,headers=headers,data=data)
+        r = requests.post(url=url,headers=headers,data=data,proxies=self.proxy)
         r_text = r.text #响应内容
         r_text_len = len(r_text) #响应长度
         status_code = r.status_code #状态码
