@@ -4,7 +4,7 @@ import re
 
 headers = {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/77.0.3865.120 Safari/537.36"}
 proxies = {
-            "http": "http://106.5.253.245:4221",
+            "http": "http://112.91.78.11:4225",
             }
 
 url='http://txt.go.sohu.com/ip/soip'#该网站会返回访问设备的公网ip地址

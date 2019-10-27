@@ -16,7 +16,7 @@ class Twayair:
         #出发到达日期(send_parameter方法里使用)
         self.go = "CJU"
         self.to = "GMP"
-        self.date = "2019-11-08"
+        self.date = "2019-11-11"
 
         #记录中间页请求成功与否
         self.send_parameter_status = False
@@ -48,6 +48,7 @@ class Twayair:
         #发送请求
         r = requests.get(url=url,params=parameter)
         r_text = r.text #响应内容
+        r_text_len = len(r_text) #响应长度
         status_code = r.status_code #状态码
         #-----------------------------------------------------------------
         #处理请求
@@ -56,6 +57,8 @@ class Twayair:
         else:
             print("获取ip成功",status_code)
             print(r_text)
+            print(r_text_len)
+
             re_ip = re.findall("\d+.\d+.\d+.\d+:\d+",r_text)[0]
             print(re_ip)
             self.proxy = {
@@ -213,5 +216,6 @@ class Twayair:
 
 
 print("*"*30)
+os.sys
 Twayair()
 print("*"*30)
