@@ -3,7 +3,6 @@ from bs4 import BeautifulSoup
 from lxml import etree
 
 class Twayair:
-
     def __init__(self):
 
         #必要请求参数(用send_parameter方法请求获得)
@@ -15,8 +14,8 @@ class Twayair:
         self.proxy = {}
 
         #出发到达日期(send_parameter方法里使用)
-        self.go = "KOJ"
-        self.to = "RMQ"
+        self.go = "ICN"
+        self.to = "NRT"
         self.date = "2019-11-09"
 
         #记录中间页请求成功与否
@@ -26,7 +25,6 @@ class Twayair:
         self.data_all = ""
 
         self.main()
-        
 
     def main(self):
         #获取代理IP

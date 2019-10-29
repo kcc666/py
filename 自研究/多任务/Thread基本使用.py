@@ -6,13 +6,13 @@ import threading
 
 
 def sing():
-    for i in range(1, 8):
+    for i in range(1, 10):
         print("唱~", i)
         time.sleep(0.5)
 
 
 def dance():
-    for i in range(1, 6):
+    for i in range(1, 10):
         print("跳~", i)
         time.sleep(0.5)
 
@@ -31,11 +31,12 @@ def main():
     t2 = threading.Thread(target=dance)
     t1.start()
     t2.start()
+    
 
-    while True:
-        os.system("cls")
-        print(len(threading.enumerate()))
-        time.sleep(0.3)
+    # while True:
+    #     # os.system("cls")
+    #     print(len(threading.enumerate()))
+    #     time.sleep(0.3)
 
 
 if __name__ == "__main__":
