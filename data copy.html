@@ -67,11 +67,6 @@
             <!-- 리스트 -->
             <div class="section_list" id="price_list_route_1">
                 <ul>
-
-
-                    
-                    
-
                     <!-- 单条信息开始 -->
                     <li class="price_list route_all route_1">
                         <a class="section_list_box" href="#none">
@@ -81,22 +76,8 @@
                                 <div class="service_section_box">
                                     <!-- 구간 -->
                                     <button class="bul_air_info" onclick="flightOperateInfo(&#39;德威航空&#39;,&#39;737-800&#39;,&#39;N&#39;,&#39;702&#39;,&#39;TW&#39;);">TW702</button>
-                                     	
-                                    <!-- 이원구간인 경우, 출발날짜 표기, 2019-07-16 jebaek --> 	
+                                    <button class="bul_air_info" th:text="${segmentInfo.flightIdentifierInfo.carrierCode + segmentInfo.flightIdentifierInfo.flightNumber}"th:onclick="${'flightOperateInfo('''+(segmentInfo.operatingAirlineInfo!=null?segmentInfo.operatingAirlineInfo.carrierName:'T\''way air')+''','''+segmentInfo.aircraftInfo.type+'-'+segmentInfo.aircraftInfo.version+''','''+(segmentInfo.operatingAirlineInfo!=null?'Y':'N')+''');'}">
                                     
-                                     	
-                                    <!--
-                                    <button class="bul_air_info" th:text="${segmentInfo.flightIdentifierInfo.carrierCode + segmentInfo.flightIdentifierInfo.flightNumber}"
-                                            th:onclick="${'flightOperateInfo('''+(segmentInfo.operatingAirlineInfo!=null?segmentInfo.operatingAirlineInfo.carrierName:'T\''way air')+''','''+segmentInfo.aircraftInfo.type+'-'+segmentInfo.aircraftInfo.version+''','''+(segmentInfo.operatingAirlineInfo!=null?'Y':'N')+''');'}">
-                                    -->
-                                    <!-- <button th:with="carrierCode=${segmentInfo.flightIdentifierInfo.carrierCode}"
-                                        th:class="'bul_air_info' +${carrierCode eq 'TW' ? '' : (carrierCode eq 'IT' ? ' tiger' : ' eastar')}"
-                                        th:text="${carrierCode + segmentInfo.flightIdentifierInfo.flightNumber}"
-                                        th:onclick="${'flightOperateInfo('''+(segmentInfo.operatingAirlineInfo!=null?segmentInfo.operatingAirlineInfo.carrierName:'T\''way air')+''','''+segmentInfo.aircraftInfo.type+'-'+segmentInfo.aircraftInfo.version+''','''+(segmentInfo.operatingAirlineInfo!=null?'Y':'N')+''');'}">
-                                        TW101
-                                    </button> -->
-                                    <!--// 구간 -->
-                                    <!-- 출발 -->
                                     <div class="service_name first">
                                         <strong class="tit">07:55</strong>
                                         <span class="addition">CJU</span>
@@ -132,29 +113,15 @@
                                     </div>
                                     <!-- 도착 -->
                                 </div>
-                                <!--// 비행 정보 박스 -->
-
-
-                                
-
-                                
-                                
-
-
-                                
-                                
-
-                                
-                                
-
-                                    <div class="price_info fareInfo" data-dptrTime="0755" data-direct="1" data-fare="108.0">
-                                        
-                                        <span class="unit">CNY</span>
-                                        
-                                        <strong class="price">108</strong>
-                                        
-                                        <p class="empty_seats">9席</p>
-                                    </div>
+                                <!--//  -->
+                                <div class="price_info fareInfo" data-dptrTime="0755" data-direct="1" data-fare="108.0">
+                                    
+                                    <span class="unit">CNY</span>
+                                    
+                                    <strong class="price">108</strong>
+                                    
+                                    <p class="empty_seats">9席</p>
+                                </div>
 
                                 
 
@@ -163,6 +130,10 @@
 
                             </div>
                         </a>
+
+
+
+
                         <!-- 更多信息 -->
                         <div class="detail_info fix s2">
 
@@ -243,6 +214,9 @@
 
                                 <!-- 서비스 비용 -->
                             </div>
+
+
+                            
                             <div class="rate_box fareType">
                                 <!-- 운임선택 -->
                                 <div class="select_rate">
@@ -300,34 +274,38 @@
                                 
                                 
                                     <div class="rate_price">
-
-                                        
-                                        
-
                                         <span class="unit">CNY</span>
                                         <strong class="price">510</strong>
                                         <span class="empty_seats">9席</span>
                                     </div>
-                                
-
-
                                 <!--해당 운임종류 매진인 경우-->
-                                
-
-
-
                                 <!-- 서비스 비용 -->
                             </div>
                             <!-- 운임박스 -->
-                            
-
-
-
-
                         </div>
 
+
+
+                        
                     </li>
                     <!-- 单条信息结束 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                     <li class="price_list route_all route_1">
                         <a class="section_list_box" href="#none">
@@ -1943,23 +1921,17 @@
                                     </div>
                                     <!-- 도착 -->
                                 </div>
-                                <!--// 비행 정보 박스 -->
-
-
                                 
-
-                                
-                                
-                                    <div class="price_info">
-                                        <div class="soldout" data-dptrTime="1520" data-direct="1" data-fare="99999999.9">
+                                <div class="price_info">
+                                    <div class="soldout" data-dptrTime="1520" data-direct="1" data-fare="99999999.9">
 
 
-                                            
-                                            <button class="sbtn_cont alram standbyRequest" data-dptrDate="20191108" data-dptrTime="1520" data-fltNo="TW720" data-arriTime="1630" data-deptAirportCode="CJU" data-arriAirportCode="GMP" id="standbyRequest_TW720" style="display:none;">等待提示</button>
-                                            
-                                            <span class="soldout_txt">售罄</span>
-                                        </div>
+                                        
+                                        <button class="sbtn_cont alram standbyRequest" data-dptrDate="20191108" data-dptrTime="1520" data-fltNo="TW720" data-arriTime="1630" data-deptAirportCode="CJU" data-arriAirportCode="GMP" id="standbyRequest_TW720" style="display:none;">等待提示</button>
+                                        
+                                        <span class="soldout_txt">售罄</span>
                                     </div>
+                                </div>
                                 
 
 
@@ -2010,26 +1982,26 @@
                                 
                                 <!-- 서비스 내용 -->
                                 
-                                    <div class="ancillary" style="display: none;" data-exbgPiece="1" data-bundSaleYn="Y" data-exbgSize="15">
-                                    </div>
-                                    <div class="rate_list">
-                                        <p class="service carryon">机内行李 10KG</p>
+                                <div class="ancillary" style="display: none;" data-exbgPiece="1" data-bundSaleYn="Y" data-exbgSize="15">
+                                </div>
+                                <div class="rate_list">
+                                    <p class="service carryon">机内行李 10KG</p>
 
 
+                                    
+                                    
+                                    <p class="service free_bag">
+                                        <!--무료위탁수하물 15kg-->
+                                        免费托运行李
+                                        
+                                        15KG
                                         
                                         
-                                        <p class="service free_bag">
-                                            <!--무료위탁수하물 15kg-->
-                                            免费托运行李
-                                            
-                                            15KG
-                                            
-                                            
-                                        </p>
+                                    </p>
 
-                                        
-                                        <p class="service bundle">Bundle附加服务 可以购买</p>
-                                    </div>
+                                    
+                                    <p class="service bundle">Bundle附加服务 可以购买</p>
+                                </div>
                                 
                                 <!-- 서비스 내용 -->
                                 <!-- 서비스 비용 -->
@@ -2049,6 +2021,8 @@
 
                                 <!-- 서비스 비용 -->
                             </div>
+
+                            
                             <div class="rate_box fareType">
                                 <!-- 운임선택 -->
                                 <div class="select_rate">

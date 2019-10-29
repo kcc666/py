@@ -1,0 +1,206 @@
+<!-- 单条信息开始 -->
+<li class="price_list route_all route_1">
+
+
+        <a class="section_list_box" href="#none">
+            <!-- 飞行信息 -->
+            <div class="section_info">
+                
+
+
+
+                <div class="service_section_box">
+                    <!-- 구간 -->
+                    <button class="bul_air_info" onclick="flightOperateInfo(&#39;德威航空&#39;,&#39;737-800&#39;,&#39;N&#39;,&#39;702&#39;,&#39;TW&#39;);">TW702</button>
+                    <button class="bul_air_info" th:text="${segmentInfo.flightIdentifierInfo.carrierCode + segmentInfo.flightIdentifierInfo.flightNumber}"th:onclick="${'flightOperateInfo('''+(segmentInfo.operatingAirlineInfo!=null?segmentInfo.operatingAirlineInfo.carrierName:'T\''way air')+''','''+segmentInfo.aircraftInfo.type+'-'+segmentInfo.aircraftInfo.version+''','''+(segmentInfo.operatingAirlineInfo!=null?'Y':'N')+''');'}">
+                    
+                    <div class="service_name first">
+                        <strong class="tit">07:55</strong>
+                        <span class="addition">CJU</span>
+                    </div>
+                    <!-- 출발 -->
+                    <!-- 설명 -->
+                    <div class="service_exp">
+
+                        
+                        <p class="top">
+                            
+                                01h
+                            
+                            
+                                10m
+                            
+                        </p>
+                        <p class="bttm">
+
+                            <!--직항/경유 -->
+                            <button>直航</button>
+                            
+
+                            <!--<button date-type="layer" date-id="j_detail" class="txt_link">경유<button>-->
+                        </p>
+                    </div>
+                    <!--// 설명 -->
+                    <!-- 도착 -->
+                    <div class="service_name last">
+                        <strong class="tit">09:05</strong>
+                        <span class="addition">GMP</span>
+                        
+                    </div>
+                    <!-- 도착 -->
+                </div>
+                
+
+
+
+
+                <div class="price_info fareInfo" data-dptrTime="0755" data-direct="1" data-fare="108.0">
+                    
+                    <span class="unit">CNY</span>
+                    
+                    <strong class="price">108</strong>
+                    
+                    <p class="empty_seats">9席</p>
+                </div>
+
+                
+
+                
+
+
+            </div>
+        </a>
+
+
+
+
+        <!-- 更多信息 -->
+        <div class="detail_info fix s2">
+
+            
+            <!-- 智能票价 -->
+            <div class="rate_box fareType">
+
+                <div class="select_rate">
+                    <input class="tripInfo" type="radio" data-fareType="SmartFare" data-depAirportName="济州" data-routeNo="1" data-arrAirportName="首尔/金浦" data-fareTypeAvail="1" data-arrAirport="GMP" data-depAirport="CJU" data-date="2019-11-08" data-flightNumber="702" id="segmentIndex_2_1" name="tripInfo_1" />
+                    <label class="float_item" tabindex="0" for="segmentIndex_2_1">
+                        <span class="icon"></span>智能票价</label>
+
+                    <a class="btn_tooltip alert" href="javascript:fareConditions(&#39;CJU&#39;,&#39;GMP&#39;,&#39;20191108&#39;,&#39;SmartFare&#39;,&#39;KRW&#39;,&#39;KR&#39;);">
+                        <span class="blind">툴팁</span>
+                    </a>
+
+
+                    
+                    <!--segment 별 운항 정보-->
+                    <div class="segmentInfo debug" style="display: none;" data-bookingClass="D" data-departureTime="07:55" data-departureTimeZone="GMT+09:00" data-carrierCode="TW" data-flightNumber="702" data-fareBasis="DGSW6I" data-departureAirportCode="CJU" data-fareTransactionId="369635" data-aircraftInfoVersion="800" data-aircraftInfoType="737" data-segmentIndex="2" data-journeyTime="01:10" data-arrivalAirportName="首尔/金浦" data-fareType="SmartFare" data-departureDateTimeUTC="2019-11-07T22:55:00" data-arrivalTimeZone="GMT+09:00" data-flightDatewithday="2019-11-08(星期五)" data-operatingAirline="德威航空" data-departureDateTimeString="20191108075500" data-arrivalTime="09:05" data-arrivalDateTimeLTC="2019-11-08T09:05:00" data-isPromoCodeApplied="false" data-departureDateTimeLTC="2019-11-08T07:55:00" data-domIntDiv="D" data-stops="0" data-arrivalDateTimeUTC="2019-11-08T00:05:00" data-arrivalDateTimeString="20191108090500" data-departureAirportName="济州" data-flightDate="2019-11-08" data-dayChange="0" data-arrivalAirportCode="GMP" data-fareLevel="EW" data-isUsaRoute="false">segmentInfo : 2</div>
+
+                    <!--운임종류별 가격 상세정보-->
+                    <div style="display: none;" data-currencyCode="CNY" data-fareTransactionId="369635" data-baseFare_amount="23900.0" data-discount="36" data-appliedFare="108" data-baseFare_currencyCode="KRW" data-fareClass="D" data-tax="24" data-amount="159" data-surcharge="27" class="pricingInfo ADULT">&nbsp;</div>
+                    
+                </div>
+
+                <div class="ancillary" style="display: none;" data-exbgPiece="1" data-bundSaleYn="Y" data-exbgSize="15">
+                </div>
+
+                <div class="rate_list">
+                    <p class="service carryon">机内行李 10KG</p>
+
+
+                    
+                    
+                    <p class="service free_bag">
+                        <!--무료위탁수하물 15kg-->
+                        免费托运行李
+                        
+                        15KG
+                        
+                        
+                    </p>
+
+                    
+                    <p class="service bundle">Bundle附加服务 可以购买</p>
+                </div>
+
+                <div class="rate_price">
+                    <span class="unit">CNY</span>
+                    <strong class="price">108</strong>
+                    <span class="empty_seats">9席</span>
+                </div>
+
+            </div>
+
+
+            <!-- 一般运费 -->
+            <div class="rate_box fareType">
+                <!-- 운임선택 -->
+                <div class="select_rate">
+
+                    <input class="tripInfo" type="radio" data-fareType="NormalFare" data-depAirportName="济州" data-routeNo="1" data-arrAirportName="首尔/金浦" data-fareTypeAvail="1" data-arrAirport="GMP" data-depAirport="CJU" data-date="2019-11-08" data-flightNumber="702" id="segmentIndex_2_2" name="tripInfo_1" />
+
+                    <label class="float_item" tabindex="0" for="segmentIndex_2_2">
+                        <span class="icon"></span>一般运费</label>
+
+                    
+
+                    <a class="btn_tooltip alert" href="javascript:fareConditions(&#39;CJU&#39;,&#39;GMP&#39;,&#39;20191108&#39;,&#39;NormalFare&#39;,&#39;KRW&#39;,&#39;KR&#39;);">
+                        <span class="blind">툴팁</span>
+                    </a>
+
+
+                    
+                    <!--segment 별 운항 정보-->
+                    <div class="segmentInfo debug" style="display: none;" data-bookingClass="Y" data-departureTime="07:55" data-departureTimeZone="GMT+09:00" data-carrierCode="TW" data-flightNumber="702" data-fareBasis="YGNW7O" data-departureAirportCode="CJU" data-fareTransactionId="383187" data-aircraftInfoVersion="800" data-aircraftInfoType="737" data-segmentIndex="2" data-journeyTime="01:10" data-arrivalAirportName="首尔/金浦" data-fareType="NormalFare" data-departureDateTimeUTC="2019-11-07T22:55:00" data-arrivalTimeZone="GMT+09:00" data-flightDatewithday="2019-11-08(星期五)" data-operatingAirline="德威航空" data-departureDateTimeString="20191108075500" data-arrivalTime="09:05" data-arrivalDateTimeLTC="2019-11-08T09:05:00" data-isPromoCodeApplied="false" data-departureDateTimeLTC="2019-11-08T07:55:00" data-domIntDiv="D" data-stops="0" data-arrivalDateTimeUTC="2019-11-08T00:05:00" data-arrivalDateTimeString="20191108090500" data-departureAirportName="济州" data-flightDate="2019-11-08" data-dayChange="0" data-arrivalAirportCode="GMP" data-fareLevel="EW" data-isUsaRoute="false">segmentInfo : 2</div>
+
+                    <!--운임종류별 가격 상세정보-->
+                    <div style="display: none;" data-currencyCode="CNY" data-fareTransactionId="383187" data-baseFare_amount="85000.0" data-discount="0" data-appliedFare="510" data-baseFare_currencyCode="KRW" data-fareClass="Y" data-tax="24" data-amount="561" data-surcharge="27" class="pricingInfo ADULT">&nbsp;</div>
+                    
+                </div>
+                <!-- 운임선택 -->
+
+
+                
+                <!-- 서비스 내용 -->
+                
+                    <div class="ancillary" style="display: none;" data-exbgPiece="1" data-bundSaleYn="Y" data-exbgSize="15">
+                    </div>
+                    <div class="rate_list">
+                        <p class="service carryon">机内行李 10KG</p>
+
+
+                        
+                        
+                        <p class="service free_bag">
+                            <!--무료위탁수하물 15kg-->
+                            免费托运行李
+                            
+                            15KG
+                            
+                            
+                        </p>
+
+                        
+                        <p class="service bundle">Bundle附加服务 可以购买</p>
+                    </div>
+                
+                <!-- 서비스 내용 -->
+                <!-- 서비스 비용 -->
+
+                
+                
+                    <div class="rate_price">
+                        <span class="unit">CNY</span>
+                        <strong class="price">510</strong>
+                        <span class="empty_seats">9席</span>
+                    </div>
+                <!--해당 운임종류 매진인 경우-->
+                <!-- 서비스 비용 -->
+            </div>
+            
+        </div>
+
+
+
+        
+    </li>
+    <!-- 单条信息结束 -->
