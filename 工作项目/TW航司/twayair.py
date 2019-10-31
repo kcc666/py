@@ -317,8 +317,8 @@ class Twayair:
         #打印最后结果
         print(data_all)
 
-
-os.system("cls")
-print("*"*30)
-Twayair()
-print("*"*30)
+if __name__ == "__main__":
+    os.system("cls")
+    print("*"*30)
+    Twayair()
+    print("*"*30)
