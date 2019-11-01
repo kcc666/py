@@ -14,7 +14,13 @@ print("*"*30)
 # r_search = re.findall("[cC]f",search_str)
 # print(r_search) 
 
+print("当前工作路径:",os.getcwd())
+print("当前文件路径:",__file__)
+print("当前文件所在目录:",os.path.dirname(__file__))
+# print(os.chdir.__doc__)
 
+file_in = os.path.dirname(__file__)
+os.chdir(file_in)
 
-
+print("当前工作路径:",os.getcwd())
 print("*"*30)
