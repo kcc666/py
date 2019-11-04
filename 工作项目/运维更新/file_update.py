@@ -1,4 +1,3 @@
-from tkinter import *
 import time
 import psutil
 import os
@@ -7,7 +6,6 @@ import requests
 import zipfile
 import threading
 import shutil
-import sendMessage
 import threading
 import subprocess
 import time
@@ -18,23 +16,20 @@ class update_file():
 
         #=================================================
         self.server_root_url = "http://106.15.53.80:56789/" #服务器根目录
-        self.local_root_url = "d:/DirectSpider"
+        self.local_root_url = "d:/DirectSpider" #本地文件目录
         #=================================================
         self.new_version_number = "" #最新版本号(v94)
         self.local_version_number = "" #本地版本号(v70)
         #=================================================
         self.server_new_version_url = "http://106.15.53.80:56789/newVersion.txt" #最新版本号获取地址
         self.local_new_version_url = "d:/DirectSpider/Version.txt" #本地版本号获取地址
-        self.local_diary_url = "d:/DirectSpider/VersionDate.txt"
+        self.local_diary_url = "d:/DirectSpider/VersionDate.txt" #本地日志地址
         #=================================================
         self.new_file_name = "" #新版本文件名
         #=================================================
         self.file_download_state = False #文件下载状态,默认False
 
         self.unfile_status = False #文件解压状态
-
-        self.main()
-
 
     #=====================================================
     def get_new_version_number(self): #获取新版本号
@@ -176,23 +171,24 @@ class update_file():
 
 class send_message():
     #=================================================
-    def __init__(self):
+    def __init__(self): #初始化
         pass
     #=================================================
-    def send(self):
+    def send(self): #发送数据
         data = {
             'process': self.get_process('Spider.exe'),
             'cpustate': self.get_cpu_state(),
             'memorystate': self.get_memory_state(),
             'computername': self.get_computer_name(),
-            'version':self.get_version()
+            'version':self.get_version(),
+            'speed':self.get_net_speed()
         }
         # 创建套接字
         udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         # 发送数据
         udp_socket.sendto(str(data).encode('utf8'), ('106.15.53.80', 8989))
     #=================================================
-    def get_process(self,processname):
+    def get_process(self,processname): #获得spider进程数量
         # 检测进程数量
         count = 0
         # 获得一个列表里面存放了所有运行的进程的id
@@ -206,20 +202,41 @@ class send_message():
         except:
             get_process(processname)
     #=================================================
-    def get_cpu_state(self):
+    def get_cpu_state(self): #获得CPU使用率
         return str(psutil.cpu_percent(1))
     #=================================================
-    def get_memory_state(self):
+    def get_memory_state(self): #获得内存使用率
         phymem = psutil.virtual_memory()
         return [phymem.percent, str(int(phymem.used/1024/1024))+"M", str(int(phymem.total/1024/1024))+"M"]
     #=================================================
-    def get_computer_name(self):
+    def get_computer_name(self): #获得计算机名称
         return socket.gethostname()
     #=================================================
-    def get_version(self):
+    def get_version(self): #获得Spider本地版本号
         with open("D:/DirectSpider/Version.txt","r")as f:
             return f.read()
     #=================================================
+    def get_net_speed(self): #获得过去十秒的平均网速
+        #t1时刻发送/接收字节总数
+        t1_send = psutil.net_io_counters()[0]
+        t1_recv = psutil.net_io_counters()[1]
+        
+        #等待10秒
+        time.sleep(10)
+        #t2时刻发送/接收字节总数
+        t2_send = psutil.net_io_counters()[0]
+        t2_recv = psutil.net_io_counters()[1]
+        #t2-t1得到一秒内的上传速率B/S,单位换算Kb/s
+        send_end = (t2_send-t1_send)/1000/10
+        recv_end = (t2_recv-t1_recv)/1000/10
+
+        up = ["up","%0.1f" % send_end,"kb/s"]
+        down = ["down","%0.1f" % recv_end,"kb/s"]
+        # print(up)
+        # print(down)
+        return [up,down]
+    #=================================================
+
     def main(self):
         while True:
             try:
@@ -227,7 +244,22 @@ class send_message():
                 print("(发送数据)")
             except:
                 self.send()
-            time.sleep(10)
-os.system("cls")
-# update_file().main()
-send_message().main()
+
+def kill_powershell():
+    while True:
+        os.system('taskkill /IM cmd.exe /F')
+        os.system('taskkill /IM powershell.exe /F')
+        time.sleep(57)
+
+    
+
+
+if __name__ == "__main__":
+    os.system("cls")
+    t1 = threading.Thread(target=update_file().main)
+    t2 = threading.Thread(target=send_message().main)
+    t3 = threading.Thread(target=kill_powershell)
+    t1.start()
+    t2.start()
+    t3.start()
+
