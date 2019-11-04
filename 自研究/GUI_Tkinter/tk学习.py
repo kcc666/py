@@ -17,9 +17,10 @@ btn1_style = {
 
 #创建按钮对象,root是刚才创建的窗体,btn1_style是样式,command是点击按钮时的事件
 btn1 = tkinter.Button(root,btn1_style,command=cc)
+text1 = tkinter.Text(root,text = "你好")
 
 #将按钮生成并打包到窗体上
 btn1.pack()
-
+text1.pack()
 root.mainloop() #使窗口对象保持
 

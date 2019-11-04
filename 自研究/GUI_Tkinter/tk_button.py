@@ -1,15 +1,9 @@
-#!/usr/bin/python
-# -*- coding: UTF-8 -*-
- 
-import tkinter
-import tkMessageBox
- 
-top = tkinter.Tk()
- 
-def helloCallBack():
-   tkMessageBox.showinfo( "Hello Python", "Hello Runoob")
- 
-B = Tkinter.Button(top, text ="点我", command = helloCallBack)
- 
-B.pack()
-top.mainloop()
+import tkinter as tk
+
+app=tk.Tk()##创建Tk类
+app.title("YUE~AN")##标题
+
+thelabel=tk.Label(app,text="YUEwqwqwqqwqw AN")##标签，上面可以添加文本，图像等
+thelabel.pack()##可以自动调节大小的方法
+
+app.mainloop()
