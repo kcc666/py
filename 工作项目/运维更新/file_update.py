@@ -8,7 +8,7 @@ import threading
 import shutil
 import threading
 import subprocess
-import time
+import json
 
 class update_file():
     '''文件更新类'''
@@ -28,8 +28,12 @@ class update_file():
         self.new_file_name = "" #新版本文件名
         #=================================================
         self.file_download_state = False #文件下载状态,默认False
-
+        #=================================================
         self.unfile_status = False #文件解压状态
+        #=================================================
+         
+
+
 
     #=====================================================
     def get_new_version_number(self): #获取新版本号
@@ -116,13 +120,15 @@ class update_file():
     def start_(self,on_off): #开启或关闭程序
         if on_off == "open":
             try:
-                subprocess.run("start.bat")
+                subprocess.call('start.bat', shell=True,creationflags=0x08000000)
+                # subprocess.run("start.bat")
                 print("DirectSpider开启")
             except:
                 print("关闭DirectSpider时错误")
         elif on_off == "close":
             try:
-                subprocess.run("stop.bat")
+                subprocess.call('stop.bat', shell=True ,creationflags=0x08000000)
+                # subprocess.run("stop.bat")
                 print("DirectSpider已关闭")
             except:
                 print("关闭DirectSpider时错误")
@@ -141,6 +147,8 @@ class update_file():
             #判断一致性
             if self.local_version_number == self.new_version_number :
                 print("已是最新版本,不更新")
+                print(time.strftime("%Y-%m-%d %X", time.localtime()))
+                print("*"*40)
             else:
                 print("线上有最新版,更新")
                 self.get_file()
@@ -157,10 +165,11 @@ class update_file():
                         self.copy_file()
                         #开启DS程序
                         self.start_("open")
-                        #写入日志
-                        self.write_diray()
                         # 删除多余文件
                         self.del_file()
+                        #写入日志
+                        self.write_diray()
+                        print("*"*40)
                     else:
                         print("文件解压失败")
                         return
@@ -181,7 +190,8 @@ class send_message():
             'memorystate': self.get_memory_state(),
             'computername': self.get_computer_name(),
             'version':self.get_version(),
-            'speed':self.get_net_speed()
+            'speed':self.get_net_speed(),
+            'type':self.get_vps_type()
         }
         # 创建套接字
         udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
@@ -236,6 +246,20 @@ class send_message():
         # print(down)
         return [up,down]
     #=================================================
+    def get_vps_type(self):#得知当前自己是什么类型,search/verify/active
+
+        try:
+            r = requests.get("http://106.15.53.80:56789/vpsType.json")
+            r_text = r.text
+            a = json.loads(r_text)
+            cpn = socket.gethostname()
+            for i in a:
+                if i["computerName"] == cpn:
+                    return  i["type"]
+            return "unknown"
+        except:
+            return "error"  
+    #=================================================
 
     def main(self):
         while True:
@@ -247,12 +271,17 @@ class send_message():
 
 def kill_powershell():
     while True:
-        os.system('taskkill /IM cmd.exe /F')
-        os.system('taskkill /IM powershell.exe /F')
+        try:
+            subprocess.call('taskkill /F /IM powershell.exe', creationflags=0x08000000, shell=True)
+            print("(killpowershell)")
+            r = requests.get("http://106.15.53.80:56789/killcmd.txt")
+            r_text = r.text
+            if r_text == "kill":
+                print("(killcmd)")
+                subprocess.call('taskkill /F /IM cmd.exe', shell=True ,creationflags=0x08000000)
+        except:
+            print("未找到文件")
         time.sleep(57)
-
-    
-
 
 if __name__ == "__main__":
     os.system("cls")
@@ -262,4 +291,3 @@ if __name__ == "__main__":
     t1.start()
     t2.start()
     t3.start()
-

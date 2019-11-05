@@ -23,8 +23,5 @@ label1 = Label(win,
     )
 label1.pack(expand="yes",fill="both")
 
-
-
-
 #启动主窗口
 win.mainloop() 

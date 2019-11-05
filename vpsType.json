@@ -1,0 +1,37 @@
+[
+    {"computerName":"LJ46792","type":"search"},
+    {"computerName":"LJ97332","type":"search"},
+    {"computerName":"LJ117388","type":"search"},
+    {"computerName":"LJ119284","type":"search"},
+    {"computerName":"LJ153286","type":"search"},
+    {"computerName":"LJ194262","type":"search"},
+    {"computerName":"LJ213751","type":"search"},
+    {"computerName":"LJ231088","type":"search"},
+    {"computerName":"LJ241792","type":"search"},
+    {"computerName":"LJ264545","type":"search"},
+    {"computerName":"LJ304267","type":"search"},
+    {"computerName":"LJ392981","type":"search"},
+    {"computerName":"LJ492477","type":"search"},
+    {"computerName":"LJ525685","type":"search"},
+    {"computerName":"LJ626978","type":"search"},
+
+    {"computerName":"LJ26863","type":"active"},
+    {"computerName":"LJ78659","type":"active"},
+    {"computerName":"LJ105576","type":"active"},
+    {"computerName":"LJ122066","type":"active"},
+    {"computerName":"LJ123831","type":"active"},
+    {"computerName":"LJ143021","type":"active"},
+    {"computerName":"LJ411569","type":"active"},
+    {"computerName":"LJ656442","type":"active"},
+    {"computerName":"LJ836492","type":"active"},
+    {"computerName":"LJ853875","type":"active"},
+    {"computerName":"LJ905173","type":"active"},
+
+    {"computerName":"LJ652277","type":"verify"},
+    {"computerName":"LJ692712","type":"verify"},
+    {"computerName":"LJ877372","type":"verify"},
+    {"computerName":"LJ888365","type":"verify"},
+    {"computerName":"LJ926635","type":"verify"},
+    {"computerName":"LJ961902","type":"verify"}
+
+]
