@@ -16,7 +16,7 @@ class Twayair:
         #出发到达日期(send_parameter方法里使用)
         self.go = "ICN"
         self.to = "NRT"
-        self.date = "2019-11-09"
+        self.date = "2019-11-21"
 
         #记录中间页请求成功与否
         self.send_parameter_status = False
@@ -317,7 +317,8 @@ class Twayair:
         #打印最后结果
         print(data_all)
 
-if __name__ == "__main__":
+if __name__ == "__main__":  
+    
     os.system("cls")
     print("*"*30)
     Twayair()

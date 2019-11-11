@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 
-# Scrapy settings for mingyan project
+# Scrapy settings for myspider project
 #
 # For simplicity, this file contains only settings considered important or
 # commonly used. You can find more settings consulting the documentation:
@@ -9,14 +9,15 @@
 #     https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 
-BOT_NAME = 'mingyan'
+BOT_NAME = 'myspider'
 
-SPIDER_MODULES = ['mingyan.spiders']
-NEWSPIDER_MODULE = 'mingyan.spiders'
-
+SPIDER_MODULES = ['myspider.spiders']
+NEWSPIDER_MODULE = 'myspider.spiders'
+LOG_LEVEL = "WARNING"
+LOG_FILE = "./log.log"
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
-#USER_AGENT = 'mingyan (+http://www.yourdomain.com)'
+#USER_AGENT = 'myspider (+http://www.yourdomain.com)'
 
 # Obey robots.txt rules
 ROBOTSTXT_OBEY = True
@@ -47,13 +48,13 @@ ROBOTSTXT_OBEY = True
 # Enable or disable spider middlewares
 # See https://docs.scrapy.org/en/latest/topics/spider-middleware.html
 #SPIDER_MIDDLEWARES = {
-#    'mingyan.middlewares.MingyanSpiderMiddleware': 543,
+#    'myspider.middlewares.MyspiderSpiderMiddleware': 543,
 #}
 
 # Enable or disable downloader middlewares
 # See https://docs.scrapy.org/en/latest/topics/downloader-middleware.html
 #DOWNLOADER_MIDDLEWARES = {
-#    'mingyan.middlewares.MingyanDownloaderMiddleware': 543,
+#    'myspider.middlewares.MyspiderDownloaderMiddleware': 543,
 #}
 
 # Enable or disable extensions
@@ -64,9 +65,10 @@ ROBOTSTXT_OBEY = True
 
 # Configure item pipelines
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'mingyan.pipelines.MingyanPipeline': 300,
-#}
+# ITEM_PIPELINES = {
+#    'myspider.pipelines.MyspiderPipeline': 300,
+#    'myspider.pipelines.MyspiderPipeline1': 300,
+# }
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://docs.scrapy.org/en/latest/topics/autothrottle.html
