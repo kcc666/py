@@ -184,19 +184,23 @@ class send_message():
         pass
     #=================================================
     def send(self): #发送数据
-        data = {
-            'process': self.get_process('Spider.exe'),
-            'cpustate': self.get_cpu_state(),
-            'memorystate': self.get_memory_state(),
-            'computername': self.get_computer_name(),
-            'version':self.get_version(),
-            'speed':self.get_net_speed(),
-            'type':self.get_vps_type()
-        }
-        # 创建套接字
-        udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        # 发送数据
-        udp_socket.sendto(str(data).encode('utf8'), ('106.15.53.80', 8989))
+        try:
+            data = {
+                'process': self.get_process('Spider.exe'),
+                'cpustate': self.get_cpu_state(),
+                'memorystate': self.get_memory_state(),
+                'computername': self.get_computer_name(),
+                'version':self.get_version(),
+                'speed':self.get_net_speed(),
+                'type':self.get_vps_type()
+            }
+            # 创建套接字
+            udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            # 发送数据
+            udp_socket.sendto(str(data).encode('utf8'), ('106.15.53.80', 8989))
+        except BaseException as e:
+            with open("bug.txt","w",encoding="utf8")as f:
+                f.write(str(e))
     #=================================================
     def get_process(self,processname): #获得spider进程数量
         # 检测进程数量

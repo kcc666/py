@@ -7,7 +7,7 @@ os.system("cls")
 # 创建套接字
 tcp_server_socket =  socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 
-# 绑定基本信息
+# 绑定基本信息 第一个参数表示本机地址,第二个参数表示端口号
 tcp_server_socket.bind(("",7890))
 
 #设置监听模式(最大连接数)
