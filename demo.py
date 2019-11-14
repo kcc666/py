@@ -1,10 +1,46 @@
-import random
-first_name = ["张","黄","刘","李","陈","蔡"]
-last_name = ["帅","桥","天","美","花","奇","琳","坤","徐","娇","芝"]
+data = "bookingTicket="+self.bt
+data+="&tripType=OW"
+data+="&tripType=OW"
+data+="&bookingType=HI"
+data+="&promoCodeDetails.promoCode="
+data+="&validPromoCode="
+data+="&availabilitySearches%5B0%5D.depAirport="+self.go
+data+="&availabilitySearches%5B0%5D.arrAirport="+self.to
+data+="&availabilitySearches%5B0%5D.flightDate="+self.date
+data+="&availabilitySearches%5B1%5D.depAirport="
+data+="&availabilitySearches%5B1%5D.arrAirport="
+data+="&availabilitySearches%5B1%5D.flightDate="
+data+="&availabilitySearches%5B2%5D.depAirport="
+data+="&availabilitySearches%5B2%5D.arrAirport="
+data+="&availabilitySearches%5B2%5D.flightDate="
+data+="&availabilitySearches%5B3%5D.depAirport="
+data+="&availabilitySearches%5B3%5D.arrAirport="
+data+="&availabilitySearches%5B3%5D.flightDate="
+data+="&availabilitySearches%5B4%5D.depAirport="
+data+="&availabilitySearches%5B4%5D.arrAirport="
+data+="&availabilitySearches%5B4%5D.flightDate="
+data+="&paxCountDetails%5B0%5D.paxCount=1"
+data+="&paxCountDetails%5B1%5D.paxCount=0"
+data+="&paxCountDetails%5B2%5D.paxCount=0"
+data+="&availabilitySearches%5B0%5D.depAirportName="
+data+="&availabilitySearches%5B0%5D.arrAirportName="
+data+="&availabilitySearches%5B1%5D.depAirportName="
+data+="&availabilitySearches%5B1%5D.arrAirportName="
+data+="&availabilitySearches%5B2%5D.depAirportName="
+data+="&availabilitySearches%5B2%5D.arrAirportName="
+data+="&availabilitySearches%5B3%5D.depAirportName="
+data+="&availabilitySearches%5B3%5D.arrAirportName="
+data+="&availabilitySearches%5B4%5D.depAirportName="
+data+="&availabilitySearches%5B4%5D.arrAirportName="
+data+="&_csrf="+self._csrf
+data+="&pax=1"
+data+="&pax=0"
+data+="&pax=0"
+data+="&deptAirportCode="+self.go
+data+="&arriAirportCode="+self.to
+data+="&schedule="+self.date
 
 
-for i in range(20):
-    if random.randint(1,2) == 1:
-        print(random.choice(first_name)+random.choice(last_name))
-    else:
-        print(random.choice(first_name)+random.choice(last_name)+random.choice(last_name))
+print('*'*40)
+print(data)
+print('*'*40)

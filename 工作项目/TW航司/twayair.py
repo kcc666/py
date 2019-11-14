@@ -1,10 +1,16 @@
+
+
 import requests,json,os,re,time
 from bs4 import BeautifulSoup
 from lxml import etree
+# from app.modular.AirLccFareModel import AirRequest
 
 class Twayair:
     def __init__(self):
-
+        # assert isinstance(paramRequest,AirRequest)
+        
+        # paramRequest
+        
         #必要请求参数(用send_parameter方法请求获得)
         self.session = ""
         self._csrf = ""
@@ -14,8 +20,8 @@ class Twayair:
         self.proxy = {}
 
         #出发到达日期(send_parameter方法里使用)
-        self.go = "ICN"
-        self.to = "NRT"
+        self.go = "NRT"
+        self.to = "ICN"
         self.date = "2019-11-21"
 
         #记录中间页请求成功与否
@@ -160,7 +166,48 @@ class Twayair:
             ,"Accept-Language": "zh-CN,zh;q=0.9"
             ,"Cookie": "_ga=GA1.2.1531734403.1571737546; _gid=GA1.2.375787299.1571737546; SETTINGS_REGION=CN; SETTINGS_LANGUAGE=zh-CN;"+self.session+"SETTINGS_CURRENCY=CNY; wcs_bt=s_12514e83073b:1571737564; __dbl__pv=9; dable_uid=45530640.1571737576840; __ZEHIC7962=1571734155;"
         }
-        data = "bookingTicket=<bt>&tripType=OW&bookingType=HI&promoCodeDetails.promoCode=&validPromoCode=&availabilitySearches%5B0%5D.depAirport=<chufa>&availabilitySearches%5B0%5D.arrAirport=<daoda>&availabilitySearches%5B0%5D.flightDate=<riqi>&availabilitySearches%5B1%5D.depAirport=&availabilitySearches%5B1%5D.arrAirport=&availabilitySearches%5B1%5D.flightDate=&availabilitySearches%5B2%5D.depAirport=&availabilitySearches%5B2%5D.arrAirport=&availabilitySearches%5B2%5D.flightDate=&availabilitySearches%5B3%5D.depAirport=&availabilitySearches%5B3%5D.arrAirport=&availabilitySearches%5B3%5D.flightDate=&availabilitySearches%5B4%5D.depAirport=&availabilitySearches%5B4%5D.arrAirport=&availabilitySearches%5B4%5D.flightDate=&paxCountDetails%5B0%5D.paxCount=1&paxCountDetails%5B1%5D.paxCount=0&paxCountDetails%5B2%5D.paxCount=0&availabilitySearches%5B0%5D.depAirportName=&availabilitySearches%5B0%5D.arrAirportName=&availabilitySearches%5B1%5D.depAirportName=&availabilitySearches%5B1%5D.arrAirportName=&availabilitySearches%5B2%5D.depAirportName=&availabilitySearches%5B2%5D.arrAirportName=&availabilitySearches%5B3%5D.depAirportName=&availabilitySearches%5B3%5D.arrAirportName=&availabilitySearches%5B4%5D.depAirportName=&availabilitySearches%5B4%5D.arrAirportName=&_csrf=<csrf>&pax=1&pax=0&pax=0&deptAirportCode=<chufa>&arriAirportCode=<daoda>&schedule=<riqi>".replace("<bt>",self.bt).replace("<chufa>",self.go).replace("<daoda>",self.to).replace("<riqi>",self.date).replace("<csrf>",self._csrf)
+
+        data = "bookingTicket="+self.bt
+        data+="&tripType=OW"
+        data+="&bookingType=HI"
+        data+="&promoCodeDetails.promoCode="
+        data+="&validPromoCode="
+        data+="&availabilitySearches%5B0%5D.depAirport="+self.go
+        data+="&availabilitySearches%5B0%5D.arrAirport="+self.to
+        data+="&availabilitySearches%5B0%5D.flightDate="+self.date
+        # data+="&availabilitySearches%5B1%5D.depAirport="
+        # data+="&availabilitySearches%5B1%5D.arrAirport="
+        # data+="&availabilitySearches%5B1%5D.flightDate="
+        # data+="&availabilitySearches%5B2%5D.depAirport="
+        # data+="&availabilitySearches%5B2%5D.arrAirport="
+        # data+="&availabilitySearches%5B2%5D.flightDate="
+        # data+="&availabilitySearches%5B3%5D.depAirport="
+        # data+="&availabilitySearches%5B3%5D.arrAirport="
+        # data+="&availabilitySearches%5B3%5D.flightDate="
+        # data+="&availabilitySearches%5B4%5D.depAirport="
+        # data+="&availabilitySearches%5B4%5D.arrAirport="
+        # data+="&availabilitySearches%5B4%5D.flightDate="
+        data+="&paxCountDetails%5B0%5D.paxCount=1"
+        data+="&paxCountDetails%5B1%5D.paxCount=0"
+        data+="&paxCountDetails%5B2%5D.paxCount=0"
+        data+="&availabilitySearches%5B0%5D.depAirportName="
+        data+="&availabilitySearches%5B0%5D.arrAirportName="
+        # data+="&availabilitySearches%5B1%5D.depAirportName="
+        # data+="&availabilitySearches%5B1%5D.arrAirportName="
+        # data+="&availabilitySearches%5B2%5D.depAirportName="
+        # data+="&availabilitySearches%5B2%5D.arrAirportName="
+        # data+="&availabilitySearches%5B3%5D.depAirportName="
+        # data+="&availabilitySearches%5B3%5D.arrAirportName="
+        # data+="&availabilitySearches%5B4%5D.depAirportName="
+        # data+="&availabilitySearches%5B4%5D.arrAirportName="
+        data+="&_csrf="+self._csrf
+        data+="&pax=1"
+        data+="&pax=0"
+        data+="&pax=0"
+        data+="&deptAirportCode="+self.go
+        data+="&arriAirportCode="+self.to
+        data+="&schedule="+self.date
+        
         #-----------------------------------------------------------------
         #发送请求
         try:
