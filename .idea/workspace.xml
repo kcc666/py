@@ -1,7 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="94205c5c-9d39-4f2d-a501-1c07719772e2" name="Default Changelist" comment="" />
+    <list default="true" id="94205c5c-9d39-4f2d-a501-1c07719772e2" name="Default Changelist" comment="更新">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/自研究/abc.py" beforeDir="false" afterPath="$PROJECT_DIR$/自研究/abc.py" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,7 +25,7 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="D:/git/Git/bin/git.exe" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="settings.editor.selected.configurable" value="settings.github" />
   </component>
   <component name="RunDashboard">
@@ -91,8 +94,18 @@
       <workItem from="1572144592108" duration="89000" />
       <workItem from="1573652668958" duration="74000" />
       <workItem from="1573652756710" duration="744000" />
-      <workItem from="1573698723862" duration="1862000" />
+      <workItem from="1573698723862" duration="2115000" />
+      <workItem from="1573700859047" duration="71000" />
+      <workItem from="1573700930863" duration="537000" />
     </task>
+    <task id="LOCAL-00001" summary="更新">
+      <created>1573701344215</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1573701344215</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -140,6 +153,10 @@
         <option value="1" />
       </set>
     </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="更新" />
+    <option name="LAST_COMMIT_MESSAGE" value="更新" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/py$tw_oop.coverage" NAME="tw_oop Coverage Results" MODIFIED="1572143236201" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/TW航司" />
