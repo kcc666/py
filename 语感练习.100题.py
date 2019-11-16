@@ -26,3 +26,22 @@
 # print(l.index(5))
 # ========================== 5 ===============================
 # 分别统计[True,False,0,1,2]中True,False,0,1,2元素的个数,发现了什么
+data = [True,False,0,1,2]
+countT = 0
+countF = 0
+count0 = 0
+count1 = 0
+count2 = 0
+for i in data:
+    if i == True:
+        countT+=1
+    elif i == False:
+        countF+=1
+    elif i == 0:
+        count0+=1
+    elif i == 1:
+        count1+=1
+    elif i ==2:
+        count2+=1
+print(countT,countF,count0,count1,count2)
+

@@ -2,7 +2,7 @@
 # -*- coding:utf-8 -*-
 # author: kcc time:2019/11/16
 
-import requests,re,random,threading
+import requests,re,random,threading,time
 
 
 def scrapy_ip():
@@ -29,6 +29,12 @@ def scrapy_ip():
         except BaseException as e:
             pass
 
-for i in range(100):
-    t1 = threading.Thread(target=scrapy_ip)
-    t1.start()
+# for i in range(200):
+#     t1 = threading.Thread(target=scrapy_ip)
+#     t1.start()
+for a in range(0,256):
+    for b in range(0, 256):
+        for c in range(0, 256):
+            for d in range(0, 256):
+                print(a,b,c,d,sep=".")
+
