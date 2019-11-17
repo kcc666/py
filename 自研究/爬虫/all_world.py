@@ -5,94 +5,117 @@
 import requests,re,random,threading,time,os
 
 
-def scrapy_ip():
-    while True:
 
-        #ip生成器
-        ip = str(random.randint(2,254))+"."+str(random.randint(2,254))+"."+str(random.randint(2,254))+"."+str(random.randint(2,254))
-        # ip = "162.241.94.119"
 
-        headers = {
+
+class SpiderWorld():
+
+    def __init__(self):
+
+        self.headers = {
             "User-Agent":"User-Agent: Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.97 Safari/537.36"
             ,"Accept": "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3"
         }
+
+        self.timeout = 5
+
+        self.ip_count = 4294967295
+        #2642648575
+        #4294967295
+        self.time_out_count = 0
+
+        self.bad_status_count = 0 
+
+        self.not_title_count = 0 
+
+    def getdata(self,ip):
+        
         try:
-            r = requests.get("http://"+ip,headers=headers, timeout=5)
-            if r.status_code == 200:
-                text = r.content.decode("utf8")
-                title = re.findall("<title>(.*?)</title>", text)
-                if len(title)!=0 :
-                    if title[0]!="":
-                        print("*" * 40)
-                        print(ip)
-                        print(title[0])
+            r = requests.get(url=ip, headers=self.headers ,timeout=self.timeout)
+            r_code = r.status_code
+            r_text = r.content.decode("utf8")
+            title = re.findall("<title>(.*?)</title>", r_text)
+
+            if r_code!=200: 
+                self.bad_status_count+=1
+                return
+            if len(title)==0:
+                self.not_title_count+=1
+                return
+            if title[0]=="":
+                self.not_title_count+=1
+                return
+            c_ip = ip.replace("http://","")
+
+            with open("f://hello_world/"+c_ip+title[0]+".txt","w",encoding="utf8")as f:
+                pass
+
         except:
-            pass
+            self.time_out_count+=1
+            return
 
-# for i in range(200):
-#     t1 = threading.Thread(target=scrapy_ip)
-#     t1.start()
-# count = 0
-# for a in range(0,256):
-#     for b in range(0, 256):
-#         for c in range(0, 256):
-#             for d in range(0, 256):
-#                 count+=1
-#                 print(a,b,c,d,sep=".")
-#                 print(count)
-#                 if count == a==1:
-#                     time.sleep(1000)
+    def ipv4(self,n):
+        
+        if n >= 16777216:
+            ip_1 = int(n/16777216)
+            ip_1s = n%16777216
+            ip_2 = int(ip_1s/65536)
+            ip_2s = ip_1s%65536
+            ip_3 = int(ip_2s/256)
+            ip_3s = ip_2s%256
+            ip_4 = ip_3s
+            # print(ip_1,ip_2,ip_3,ip_4,sep=".")
+            return "{}.{}.{}.{}".format(ip_1,ip_2,ip_3,ip_4)
+        elif n<16777216 and n>=65536:
+            ip_1 = 0
+            ip_2 = int(n/65536)
+            ip_2s = n%65536
+            ip_3 = int(ip_2s/256)
+            ip_3s = ip_2s%256
+            ip_4 = ip_3s
+            # print(ip_1,ip_2,ip_3,ip_4,sep=".")
+            return "{}.{}.{}.{}".format(ip_1,ip_2,ip_3,ip_4)
+        elif n<65536 and n>=256:
+            ip_1 = 0
+            ip_2 = 0
+            ip_3 = int(n/256)
+            ip_3s = n%256
+            ip_4 = ip_3s
+            # print(ip_1,ip_2,ip_3,ip_4,sep=".")
+            return "{}.{}.{}.{}".format(ip_1,ip_2,ip_3,ip_4)
+        else:
+            # print("0.0.0.{}".format(n)) 
+            return "0.0.0.{}".format(n)
 
-#0.0.0.0
-#0
+    def main(self):
+        while True:
+            
+            req_ip = "http://"+self.ipv4(self.ip_count)
+            self.ip_count-=1
+            self.getdata(req_ip)
+            
+            if self.ip_count<100:return
 
-#0.0.1.0
-#256
+    def state(self):
+        while True:
+            with open("a.txt","w",encoding="utf8")as f:
+                f.write("当前轮询IP地址{}".format(self.ipv4(self.ip_count))+"\n")
+                f.write("当前剩余IP地址数{}".format(self.ip_count)+"\n")
+                f.write("超时数量{}".format(self.time_out_count)+"\n")
+                f.write("错误状态码数{}".format(self.bad_status_count)+"\n")
+                f.write("无效标题数{}".format(self.not_title_count)+"\n")
 
-#0.1.0.0
-#256*256
+            time.sleep(10)
+            
 
-#1.0.0.0
-#256*256*256
-os.system("cls")
-print("*"*40)
-
-
-def ipv4(n):
-    n-=1
-    if n >= 16777216:
-        ip_1 = int(n/16777216)
-        ip_1s = n%16777216
-        ip_2 = int(ip_1s/65536)
-        ip_2s = ip_1s%65536
-        ip_3 = int(ip_2s/256)
-        ip_3s = ip_2s%256
-        ip_4 = ip_3s
-        print(ip_1,ip_2,ip_3,ip_4,sep=".")
-    elif n<16777216 and n>=65536:
-        ip_1 = 0
-        ip_2 = int(n/65536)
-        ip_2s = n%65536
-        ip_3 = int(ip_2s/256)
-        ip_3s = ip_2s%256
-        ip_4 = ip_3s
-        print(ip_1,ip_2,ip_3,ip_4,sep=".")
-    elif n<65536 and n>=256:
-        ip_1 = 0
-        ip_2 = 0
-        ip_3 = int(n/256)
-        ip_3s = n%256
-        ip_4 = ip_3s
-        print(ip_1,ip_2,ip_3,ip_4,sep=".")
-    else:
-        print("0.0.0.{}".format(n))
-    
-
+if __name__ == "__main__":
+    a = SpiderWorld()
 
 
+    for i in range(100):
+        t = threading.Thread(target=a.main)
+        t.start()
 
-ipv4(257)
-print("*"*40)
-
-
+    a = threading.Thread(target=a.state)
+    a.start()
 
