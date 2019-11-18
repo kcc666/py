@@ -19,7 +19,7 @@ class SpiderWorld():
 
         self.timeout = 5
 
-        self.ip_count = 4294967295
+        self.ip_count = 2688889999
         #2642648575
         #4294967295
         self.time_out_count = 0
@@ -112,7 +112,7 @@ if __name__ == "__main__":
     a = SpiderWorld()
 
 
-    for i in range(100):
+    for i in range(1000):
         t = threading.Thread(target=a.main)
         t.start()
 
