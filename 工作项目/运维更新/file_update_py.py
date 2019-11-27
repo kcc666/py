@@ -146,9 +146,7 @@ class update_file():
         if on_off == "open":
             try:
                 #creationflags=0x08000000
-                subprocess.call('start.bat', shell=True)
-                p = multiprocessing.Process(target=start1)
-                p.start()
+                subprocess.call('starter.exe', shell=True)
                 print("runClient开启")
             except:
                 print("关闭runClient时错误")
@@ -162,8 +160,7 @@ class update_file():
         else:
             print("传入参数错误")
 
-    def start1(self):
-        subprocess.call('start.bat', shell=True)
+
     # =====================================================
     def main(self):
         while True:
@@ -189,12 +186,12 @@ class update_file():
                     if self.unfile_status:
                         print("文件解压成功")
                         # # 关闭DS程序
-                        # self.start_("close")
-                        # time.sleep(3)  # 给三秒时间关闭
+                        self.start_("close")
+                        time.sleep(1)  # 给三秒时间关闭
                         # 覆盖文件
                         self.copy_dir()
                         # # 开启DS程序
-                        # self.start_("open")
+                        self.start_("open")
                         # 删除多余文件
                         self.del_file()
                         # 写入日志
