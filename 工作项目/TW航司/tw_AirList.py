@@ -159,7 +159,7 @@ if __name__ == '__main__':
 
     # app.run(debug=True, host='127.0.0.1', port=8081)
 
-    t1 = threading.Thread(target=app.run)
+    t1 = threading.Thread(target=app.run,args=('0.0.0.0',8318))
     t1.start()
 
     while 1:
@@ -171,7 +171,8 @@ if __name__ == '__main__':
 
         for j in tlist:
             j.join()
-        print("本次数据抓取完毕,等待30秒重新抓取")
-        time.sleep(30)
-
+        print("本次数据抓取完毕,等待300秒重新抓取")
+        time.sleep(300)
+        for i in a.AirLineList:
+            a.q.put(i)
 
