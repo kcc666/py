@@ -171,7 +171,7 @@ if __name__ == '__main__':
 
         for j in tlist:
             j.join()
-        print("本次数据抓取完毕,等待300秒重新抓取")
+        print("本次数据抓取完毕,等待300秒重新抓取"+time.strftime("%Y-%m-%d %X",time.localtime()))
         time.sleep(300)
         for i in a.AirLineList:
             a.q.put(i)
