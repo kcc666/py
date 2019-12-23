@@ -13,6 +13,7 @@ class app():
         self.num = 0
         self.var.set(self.num)
 
+
     def labelCreater(self):
         l = tk.Label(self.window,textvariable=self.var,bg='#00d529',fg='#fff',font=('微软雅黑',12),width=15,height=2)
         l.pack()
