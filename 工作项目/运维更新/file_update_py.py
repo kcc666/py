@@ -205,21 +205,12 @@ class update_file():
                     return
             time.sleep(10)
 
-    def downTwData(self):
+    def restart_py(self):
         while 1:
-            try:
-                print("下载Tw数据")
-                r = requests.get("http://192.144.238.132:56789/test.json")
-                if r.status_code == 200:
-                    with open("test.json", "wb")as f:
-                        f.write(r.content)
-                    print("下载完成等待300秒")
-                    time.sleep(300)
-                else:
-                    print("下载失败")
-                    time.sleep(5)
-            except:
-                break
+            self.start_("close")
+            time.sleep(3)
+            self.start_("open")
+            time.sleep(1800)
 
 
 
@@ -227,7 +218,7 @@ class update_file():
 if __name__ == "__main__":
     os.system("cls")
     t1 = threading.Thread(target=update_file().main)
-    t2 = threading.Thread(target=update_file().downTwData)
+    t2 = threading.Thread(target=update_file().restart_py)
 
     t1.start()
     t2.start()
