@@ -11,15 +11,14 @@ class send_status():
     def main(self):
         while 1:
             self.send()
-            time.sleep(5)
     # 获得计算机名称
     def get_cpn(self):
         return os.environ["COMPUTERNAME"]
 
     # 获得CPU使用率
     def get_cpu(self):
-        return psutil.cpu_percent(2)
-
+        cp = psutil.cpu_percent(interval=7, percpu=False)
+        return cp
     # 获得内存使用率
     def get_memory(self):
         phymem = psutil.virtual_memory()
