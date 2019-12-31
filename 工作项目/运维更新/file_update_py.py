@@ -218,7 +218,4 @@ class update_file():
 if __name__ == "__main__":
     os.system("cls")
     t1 = threading.Thread(target=update_file().main)
-    t2 = threading.Thread(target=update_file().restart_py)
-
     t1.start()
-    t2.start()
