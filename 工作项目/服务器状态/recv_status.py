@@ -3,9 +3,10 @@
 # author: kcc time:2019/12/25
 
 from flask import Flask,request
+from flask_cors import *
 import json,time
 app = Flask(__name__)
-
+app.config['JSON_AS_ASCII'] = False
 
 data_all = {}
 
@@ -34,6 +35,7 @@ def recv():
     return "success"
 
 @app.route('/vpsinfo')
+@cross_origin()
 def secv():
     return json.dumps(data_all)
 
