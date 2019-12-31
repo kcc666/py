@@ -11,7 +11,7 @@ tcp_server_socket =  socket.socket(socket.AF_INET,socket.SOCK_STREAM)
 tcp_server_socket.bind(("",7890))
 
 #设置监听模式(最大连接数)
-tcp_server_socket.listen(128)
+tcp_server_socket.listen(2)
 
 #阻塞式接收,返回元组,1.回信息专用的套接字,2.客户端的地址
 new_client_socket,client_addr = tcp_server_socket.accept()
