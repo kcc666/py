@@ -67,9 +67,9 @@ def copy_dir(v):
 
 
 
-print("*"*30)
+print("*"*25)
 v = input("请输入版本号:")
 copy_dir(v)
 zip_yasuo(os.path.join("C:\\Users\\46321\Desktop\临时",v))
 shutil.rmtree(os.path.join("C:\\Users\\46321\Desktop\临时",v))
-print("*"*30)
+print("*"*25)
