@@ -1,8 +1,7 @@
-#!/usr/bin/env python
 # -*- coding:utf-8 -*-
 # author: kcc time:2019/12/31
 
-import os
+import os,time
 import shutil,zipfile
 
 
@@ -72,4 +71,7 @@ v = input("请输入版本号:")
 copy_dir(v)
 zip_yasuo(os.path.join("C:\\Users\\46321\Desktop\临时",v))
 shutil.rmtree(os.path.join("C:\\Users\\46321\Desktop\临时",v))
+
 print("*"*25)
+print("\n\n\n\n3秒后关闭本窗口....")
+time.sleep(3)
