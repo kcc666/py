@@ -107,9 +107,9 @@ class send_status():
             print("发送数据",time.strftime("%Y-%m-%d %X"))
 
         except Exception as e:
-            with open("except.txt","a")as f:
-                f.write(time.strftime("%Y-%m-%d %X")+"|"+str(e)+"\n")
-
+            # with open("except.txt","a")as f:
+            #     f.write(time.strftime("%Y-%m-%d %X")+"|"+str(e)+"\n")
+            pass
 
 
 if __name__ == '__main__':
