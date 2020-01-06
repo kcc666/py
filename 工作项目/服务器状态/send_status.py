@@ -10,7 +10,11 @@ class send_status():
         pass
     def main(self):
         while 1:
-            self.send()
+            try:
+                self.send()
+            except Exception as e:
+                print(e)
+                time.sleep(10)
     # 获得计算机名称
     def get_cpn(self):
         return os.environ["COMPUTERNAME"]
