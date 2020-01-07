@@ -10,7 +10,11 @@ class send_status():
         pass
     def main(self):
         while 1:
-            self.send()
+            try:
+                self.send()
+            except Exception as e:
+                print(e)
+                time.sleep(10)
     # 获得计算机名称
     def get_cpn(self):
         return os.environ["COMPUTERNAME"]
@@ -107,9 +111,9 @@ class send_status():
             print("发送数据",time.strftime("%Y-%m-%d %X"))
 
         except Exception as e:
-            with open("except.txt","a")as f:
-                f.write(time.strftime("%Y-%m-%d %X")+"|"+str(e)+"\n")
-
+            # with open("except.txt","a")as f:
+            #     f.write(time.strftime("%Y-%m-%d %X")+"|"+str(e)+"\n")
+            pass
 
 
 if __name__ == '__main__':

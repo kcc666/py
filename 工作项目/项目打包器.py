@@ -1,10 +1,15 @@
 # -*- coding:utf-8 -*-
 # author: kcc time:2019/12/31
 
-import os,time
+import os,time,requests
 import shutil,zipfile
 
-
+def get_version():
+    try:
+        r = requests.get("http://106.15.53.80:56789/pyProject/newVersion.txt")
+        print("线上版本:{}".format(r.text))
+    except:
+        print("获取最新版本错误")
 def zip_yasuo(start_dir):
     file_news = start_dir + '.zip'
     z = zipfile.ZipFile(file_news, 'w', zipfile.ZIP_DEFLATED)
@@ -67,6 +72,7 @@ def copy_dir(v):
 
 
 print("*"*25)
+get_version()
 v = input("请输入版本号:")
 copy_dir(v)
 zip_yasuo(os.path.join("C:\\Users\\46321\Desktop\临时",v))
