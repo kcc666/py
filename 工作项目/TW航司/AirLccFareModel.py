@@ -1,6 +1,6 @@
 #! /usr/bin/env python
 # coding:utf-8
-import BaseModel
+from BaseModel import BaseModel
 
 class DefaultConfig:
     DEBUG = False
