@@ -1,7 +1,6 @@
 #! /usr/bin/env python
 # coding:utf-8
-
-from app.modular.BaseModel import BaseModel
+import BaseModel
 
 class DefaultConfig:
     DEBUG = False
