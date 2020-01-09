@@ -38,7 +38,8 @@ class BaseModel():
                 if cNames[index] in self.__dict__:
                     self.__dict__[cNames[index]] = item
         except Exception as e:
-            print e
+            pass
+            # print e
         return self
     #生成一行文件
     def toTextLine(self, splitChar=',', cNames=[], head=False):
