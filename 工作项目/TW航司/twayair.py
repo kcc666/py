@@ -409,20 +409,21 @@ class Twayair():
             faild +=1
 
         if DefaultConfig.DEBUG:
-            print "-" * 80
-            print "(TW) | {}-{} {} | {} | {} | {}s | T:{} | S:{} | F:{} | R:{}".format \
-                (
-                    self.go,
-                    self.to,
-                    self.date,
-                    self.response.ResultCode,
-                    len(self.response.LowFareList),
-                    round(time.time() - self.t1, 2),
-                    total,
-                    success,
-                    faild,
-                    str(round(float(success) / total * 100, 1)) + "%"
-                )
+            pass
+            # print "-" * 80
+            # print "(TW) | {}-{} {} | {} | {} | {}s | T:{} | S:{} | F:{} | R:{}".format \
+            #     (
+            #         self.go,
+            #         self.to,
+            #         self.date,
+            #         self.response.ResultCode,
+            #         len(self.response.LowFareList),
+            #         round(time.time() - self.t1, 2),
+            #         total,
+            #         success,
+            #         faild,
+            #         str(round(float(success) / total * 100, 1)) + "%"
+            #     )
 
 if __name__ == "__main__":
     # 模拟一个请求实体a
@@ -442,7 +443,7 @@ if __name__ == "__main__":
 
     # 调用Tw实体Main方法
     b = s.main()
-    print b
+    # print b
 
 
 
