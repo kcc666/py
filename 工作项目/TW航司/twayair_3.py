@@ -26,7 +26,6 @@ class Twayair1():
         # 是否写HTML到本地
         self.write = True
 
-
         # 定义响应实体
         self.response = AirLowFareRes()
         # 接收请求实体
@@ -40,7 +39,7 @@ class Twayair1():
                 "http": "http://" + paramRequest.ip + ":" + paramRequest.port,
                 "https": "https://" + paramRequest.ip + ":" + paramRequest.port
             }
-        self.p(self.proxy)
+        self.p("代理IP:"+str(self.proxy))
 
 
 
@@ -102,8 +101,10 @@ class Twayair1():
             "statucode":0,    # 请求非200时对应的状态码
             "reqCount":0      # 记录返回时已执行的请求
         }
+        # ----------------------------------------------------------------------------------
+        # region 第一个请求
 
-        # # 请求 1--> 请求头
+        # 请求 1--> 请求头
         headers1 = {
             "Host": "www.twayair.com"
             , "Connection": "keep-alive"
@@ -122,8 +123,9 @@ class Twayair1():
 
         # 请求 1--> 发送请求
         r1  = requests.get(url="https://www.twayair.com/app/main",verify=False ,headers=headers1,timeout=self.timeout,proxies=self.proxy)
+        r1.encoding = 'uft8'
         r1_text = r1.text
-
+        self.p("第一个请求状态码{}:".format(r1.status_code))
         # 请求1 --> 保存本地 可注释
         self.w("index.html", r1.content)
 
@@ -138,8 +140,16 @@ class Twayair1():
 
             return result
 
+        # 验证码页面
+        if "보안문자입력" in r1_text:
+            result = {
+                "continue": False,  #
+                "data": "",  # 请求回来的内容
+                "statucode": "200,但有验证码",  #
+                "reqCount": 1
+            }
 
-
+            return result
 
         # 请求1 --> 获取csrf(本航司必要参数)
         csrf_text = re.findall('<input type="hidden" name="_csrf" value=".*?" />',r1_text)[0]
@@ -155,8 +165,9 @@ class Twayair1():
         # 请求1 --> 获取session
         session = "SESSION" + re.findall("SESSION(.*?);", str(r1.headers))[0] + ";"
         # self.p(session)
+        # endregion
         # ----------------------------------------------------------------------------------
-        # 请求2 --> 请求头
+        # region 第二个请求
         headers2 = {
             "Host": "www.twayair.com"
             , "Connection": "keep-alive"
@@ -179,7 +190,7 @@ class Twayair1():
         }
 
 
-        # 请求2 --> 请求参数
+        data = ""
         data = "bookingTicket=" + bookingticket
         data += "&tripType=OW"
         data += "&bookingType=HI"
@@ -204,7 +215,8 @@ class Twayair1():
 
         # 请求2 --> 发送请求
         r2 = requests.post(url="https://www.twayair.com/app/booking/chooseItinerary",verify=False, data=data, headers=headers2,timeout=self.timeout,proxies=self.proxy)
-        # self.p(r2.status_code)
+        r2.encoding = "utf8"
+        self.p("第二个请求状态码:{}".format(r2.status_code))
         if r2.status_code!=200:
             result = {
                 "continue": False,  # 提示下一个方法是否执行
@@ -215,8 +227,20 @@ class Twayair1():
 
             return result
 
-        # ---------------------------------------------------------------------------------
-        # 请求3 --> 请求头
+        # 请求2验证码页面
+        if "보안문자입력" in r2.text:
+            result = {
+                "continue": False,  #
+                "data": "",  # 请求回来的内容
+                "statucode": "200,但有验证码",  #
+                "reqCount": 2
+            }
+
+            return result
+
+        # endregion
+        # ----------------------------------------------------------------------------------
+        # region 第三个请求
         headers3 = {
             "Host": "www.twayair.com"
             , "Connection": "keep-alive"
@@ -240,6 +264,8 @@ class Twayair1():
 
         # 请求3 --> 发送请求
         r3 = requests.post("https://www.twayair.com/app/booking/layerAvailabilityList",verify=False, data=data3, headers=headers3,timeout=self.timeout,proxies=self.proxy)
+        r3.encoding="uft8"
+        self.p("第三个请求状态码:{}".format(r3.status_code))
         # self.p(r3.status_code)
 
         # 请求3 --> 写入本地
@@ -254,7 +280,17 @@ class Twayair1():
 
             return result
 
+        # 请求3验证码页面
+        if "보안문자입력" in r3.text:
+            result = {
+                "continue": False,  #
+                "data": "",  # 请求回来的内容
+                "statucode": "200,但有验证码",  #
+                "reqCount": 3
+            }
 
+            return result
+        # endregion
         # ----------------------------------------------------------------------------------
         # 最终返回
         result = {
