@@ -27,7 +27,7 @@ def copy_dir(v):
     # yuan 源目录
     # target 目标目录
     target = "C:\\Users\\46321\Desktop\临时"
-    yuan = "d:/work_py/hmyd_flask_scrapy"
+    yuan = "d:/py3flask"
 
     if not os.path.exists(os.path.join(target,v,v)):os.makedirs(os.path.join(target,v,v))
     else:print("版本目录已存在");return
@@ -76,7 +76,7 @@ get_version()
 v = input("请输入版本号:")
 copy_dir(v)
 zip_yasuo(os.path.join("C:\\Users\\46321\Desktop\临时",v))
-shutil.rmtree(os.path.join("C:\\Users\\46321\Desktop\临时",v))
+# shutil.rmtree(os.path.join("C:\\Users\\46321\Desktop\临时",v))
 
 print("*"*25)
 print("\n\n\n\n3秒后关闭本窗口....")
