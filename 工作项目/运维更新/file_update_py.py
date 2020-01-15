@@ -10,7 +10,7 @@ import threading
 import subprocess
 import json
 import multiprocessing
-
+# os.system('taskkill /f /im %s' % 'py.exe')
 
 class update_file():
     '''文件更新类'''
@@ -19,14 +19,14 @@ class update_file():
 
         # =================================================
         self.server_root_url = "http://106.15.53.80:56789/pyProject/"  # 服务器根目录
-        self.local_root_url = "d:/hmyd_flask_scrapy"  # 本地文件目录
+        self.local_root_url = "d:/py3flask"  # 本地文件目录
         # =================================================
         self.new_version_number = ""  # 最新版本号(v94)
         self.local_version_number = ""  # 本地版本号(v70)
         # =================================================
         self.server_new_version_url = "http://106.15.53.80:56789/pyProject/newVersion.txt"  # 最新版本号获取地址
-        self.local_new_version_url = "d:/hmyd_flask_scrapy/Version.txt"  # 本地版本号获取地址
-        self.local_diary_url = "d:/hmyd_flask_scrapy/VersionDate.txt"  # 本地日志地址
+        self.local_new_version_url = "d:/py3flask/Version.txt"  # 本地版本号获取地址
+        self.local_diary_url = "d:/py3flask/VersionDate.txt"  # 本地日志地址
         # =================================================
         self.new_file_name = ""  # 新版本文件名
         # =================================================
@@ -218,6 +218,6 @@ class update_file():
 if __name__ == "__main__":
     os.system("cls")
     t1 = threading.Thread(target=update_file().main)
-    t2 = threading.Thread(target=update_file().restart_py)
+    # t2 = threading.Thread(target=update_file().restart_py)
     t1.start()
-    t2.start()
+    # t2.start()
