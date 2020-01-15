@@ -70,7 +70,7 @@ class send_status():
 
         with open("D:/DirectSpider/Version.txt", "r")as f:
             csv = f.read()
-        with open("D:/hmyd_flask_scrapy/Version.txt", "r")as f1:
+        with open("D:/py3flask/Version.txt", "r")as f1:
             pyv = f1.read()
 
         return [csv,pyv]
