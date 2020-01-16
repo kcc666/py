@@ -77,43 +77,38 @@ class send_status():
 
     def send(self):
 
-        try:
-            cpn = self.get_cpn()
-            cpu = self.get_cpu()
-            m = self.get_memory()
-            m1 = m[0]
-            m2 = m[1]
-            m3 = m[2]
-            net = self.get_net()
-            up = net[0]
-            down = net[1]
-            ctype = self.get_type()
-            v = self.get_version()
-            csv= v[0]
-            pyv= v[1]
+        cpn = self.get_cpn()
+        cpu = self.get_cpu()
+        m = self.get_memory()
+        m1 = m[0]
+        m2 = m[1]
+        m3 = m[2]
+        net = self.get_net()
+        up = net[0]
+        down = net[1]
+        ctype = self.get_type()
+        v = self.get_version()
+        csv= v[0]
+        pyv= v[1]
 
 
-            param = {
-                "cpn":cpn,
-                "cpu":cpu,
-                "cpu":cpu,
-                "m1":m1,
-                "m2":m2,
-                "m3":m3,
-                "up":up,
-                "down":down,
-                "type":ctype,
-                "pyv":pyv,
-                "csv":csv
-            }
+        param = {
+            "cpn":cpn,
+            "cpu":cpu,
+            "cpu":cpu,
+            "m1":m1,
+            "m2":m2,
+            "m3":m3,
+            "up":up,
+            "down":down,
+            "type":ctype,
+            "pyv":pyv,
+            "csv":csv
+        }
 
-            requests.get('http://106.15.53.80:7001', params=param)
-            print("发送数据",time.strftime("%Y-%m-%d %X"))
+        requests.get('http://106.15.53.80:7001', params=param)
+        print("发送数据",time.strftime("%Y-%m-%d %X"))
 
-        except Exception as e:
-            # with open("except.txt","a")as f:
-            #     f.write(time.strftime("%Y-%m-%d %X")+"|"+str(e)+"\n")
-            pass
 
 
 if __name__ == '__main__':
