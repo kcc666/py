@@ -1,10 +1,7 @@
 #!/usr/bin/env python
 # -*- coding:utf-8 -*-
 # author: kcc time:2019/12/25
-
 import requests,psutil,os,time,json
-
-
 class send_status():
     def __init__(self):
         pass
@@ -18,7 +15,6 @@ class send_status():
     # 获得计算机名称
     def get_cpn(self):
         return os.environ["COMPUTERNAME"]
-
     # 获得CPU使用率
     def get_cpu(self):
         cp = psutil.cpu_percent(interval=7, percpu=False)
@@ -30,7 +26,6 @@ class send_status():
         m2 = int(phymem.used / 1024 / 1024)
         m3 = int(phymem.total / 1024 / 1024)
         return [m1,m2,m3]
-
     # 获得网络使用率
     def get_net(self):
         # t1时刻发送/接收字节总数
@@ -49,7 +44,6 @@ class send_status():
         up = round(send_end, 2)
         down = round(recv_end, 2)
         return [up,down]
-
     # 获得本机类型
     def get_type(self):
         try:
@@ -64,7 +58,6 @@ class send_status():
         except Exception as e:
             print(e)
             return "error"
-
     # 获得本地版本
     def get_version(self):
 
@@ -74,7 +67,6 @@ class send_status():
             pyv = f1.read()
 
         return [csv,pyv]
-
     def send(self):
 
         cpn = self.get_cpn()
@@ -106,10 +98,8 @@ class send_status():
             "csv":csv
         }
 
-        requests.get('http://106.15.53.80:7001', params=param)
+        requests.get('http://106.15.53.80:7001', params=param, timeout=10)
         print("发送数据",time.strftime("%Y-%m-%d %X"))
-
-
 
 if __name__ == '__main__':
     send_status().main()
