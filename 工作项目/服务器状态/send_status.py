@@ -47,7 +47,7 @@ class send_status():
     # 获得本机类型
     def get_type(self):
         try:
-            r = requests.get("http://106.15.53.80:56789/vpsType.json")
+            r = requests.get("http://106.15.53.80:56789/vpsType.json",timeout=20)
             r_text = r.text
             a = json.loads(r_text)
             cpn = self.get_cpn()
