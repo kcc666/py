@@ -41,7 +41,7 @@ class update_file():
 
         try:
             url = self.server_new_version_url
-            r = requests.get(url)
+            r = requests.get(url,timeout=20)
             self.new_version_number = (r.text).lower()
             self.new_file_name = (r.text)+".zip"
         except:
@@ -178,100 +178,7 @@ class update_file():
                     return
             time.sleep(10)
 
-class send_message():
-    #=================================================
-    def __init__(self): #初始化
-        pass
-    #=================================================
-    def send(self): #发送数据
-        try:
-            data = {
-                'process': self.get_process('Spider.exe'),
-                'cpustate': self.get_cpu_state(),
-                'memorystate': self.get_memory_state(),
-                'computername': self.get_computer_name(),
-                'version':self.get_version(),
-                'speed':self.get_net_speed(),
-                'type':self.get_vps_type()
-            }
-            # 创建套接字
-            udp_socket = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-            # 发送数据
-            udp_socket.sendto(str(data).encode('utf8'), ('106.15.53.80', 8989))
-        except BaseException as e:
-            with open("bug.txt","w",encoding="utf8")as f:
-                f.write(str(e))
-    #=================================================
-    def get_process(self,processname): #获得spider进程数量
-        # 检测进程数量
-        count = 0
-        # 获得一个列表里面存放了所有运行的进程的id
-        pl = psutil.pids()
-        # 遍历
-        try:
-            for pid in pl:
-                if(psutil.Process(pid).name() == processname):
-                    count += 1
-            return count
-        except:
-            get_process(processname)
-    #=================================================
-    def get_cpu_state(self): #获得CPU使用率
-        return str(psutil.cpu_percent(1))
-    #=================================================
-    def get_memory_state(self): #获得内存使用率
-        phymem = psutil.virtual_memory()
-        return [phymem.percent, str(int(phymem.used/1024/1024))+"M", str(int(phymem.total/1024/1024))+"M"]
-    #=================================================
-    def get_computer_name(self): #获得计算机名称
-        return socket.gethostname()
-    #=================================================
-    def get_version(self): #获得Spider本地版本号
-        with open("D:/DirectSpider/Version.txt","r")as f:
-            return f.read()
-    #=================================================
-    def get_net_speed(self): #获得过去十秒的平均网速
-        #t1时刻发送/接收字节总数
-        t1_send = psutil.net_io_counters()[0]
-        t1_recv = psutil.net_io_counters()[1]
-        
-        #等待10秒
-        time.sleep(10)
-        #t2时刻发送/接收字节总数
-        t2_send = psutil.net_io_counters()[0]
-        t2_recv = psutil.net_io_counters()[1]
-        #t2-t1得到一秒内的上传速率B/S,单位换算Kb/s
-        send_end = (t2_send-t1_send)/1000/10
-        recv_end = (t2_recv-t1_recv)/1000/10
 
-        up = ["up","%0.1f" % send_end,"kb/s"]
-        down = ["down","%0.1f" % recv_end,"kb/s"]
-        # print(up)
-        # print(down)
-        return [up,down]
-    #=================================================
-    def get_vps_type(self):#得知当前自己是什么类型,search/verify/active
-
-        try:
-            r = requests.get("http://106.15.53.80:56789/vpsType.json")
-            r_text = r.text
-            a = json.loads(r_text)
-            cpn = socket.gethostname()
-            for i in a:
-                if i["computerName"] == cpn:
-                    return  i["type"]
-            return "unknown"
-        except:
-            return "error"  
-    #=================================================
-
-    def main(self):
-        while True:
-            try:
-                self.send()
-                print("(发送数据)")
-            except:
-                self.send()
 
 def kill_powershell():
     while True:
@@ -290,8 +197,7 @@ def kill_powershell():
 if __name__ == "__main__":
     os.system("cls")
     t1 = threading.Thread(target=update_file().main)
-    t2 = threading.Thread(target=send_message().main)
+
     t3 = threading.Thread(target=kill_powershell)
     t1.start()
-    t2.start()
     t3.start()
