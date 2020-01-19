@@ -1,0 +1,46 @@
+
+连接到数据库
+mysql -u [user] -p
+[passworld]
+
+显示时间
+select now();
+
+显示数据库版本
+select version();
+
+查看所有数据库
+show databases;
+
+使用一个数据库
+use [name];
+
+查看所有表
+show tables;
+
+查看创建好的数据库编码
+show create database [name];
+
+创建一个数据库
+create database [name];
+
+删除一个数据库
+drop database [name];
+
+创建一个表
+create table kcc01(
+    id int primary key not null auto_increment,
+    value varchar(2000)
+    );
+
+给一个表添加列
+alter table [表名] add [列名] [数据类型]
+
+修改一个表的字段的数据类型或约束
+alter table [表名] modify [列名] [数据类型] [完整性约束]
+
+删除一个表的字段,或者说,删除一个表的一列,
+alter table [表名] drop [字段名]
+
+删除一个表
+drop table [表名]

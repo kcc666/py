@@ -1,0 +1,21 @@
+
+增加数据
+insert into [表名] values(值1,值2,值3,值...)
+
+部分插入
+insert into [表名] (字段1,字段2) values(字段值1,字段值2)
+
+更新
+update [表名] set [字段名]=[值] where [主键名]=[主键值]
+
+查询所有
+select * from [表名] where [条件];
+
+查询部分
+select [字段1],[字段2] from [表名];
+
+create table students(
+id int unsigned primary key auto_increment not null,
+
+
+)
