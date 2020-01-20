@@ -4,7 +4,7 @@
 
 from flask import Flask, request
 import pymysql,time,json,threading
-import queue
+import queue,traceback
 
 
 
@@ -31,7 +31,7 @@ class SaveLog():
 
         while 1:
             jsondata = self.que.get()
-
+            print("----------------------")
             print("收到一个请求")
             # 收到请求后先处理为Dict
             data = json.loads(jsondata.decode("utf8"))
@@ -76,7 +76,6 @@ class SaveLog():
 
     def saveData(self,data):
         print("表已创建,存储数据")
-        print(data)
 
         sql =\
         '''
@@ -127,7 +126,6 @@ class SaveLog():
 
 
 
-
 saver = SaveLog()
 
 
@@ -149,7 +147,11 @@ def pushLog():
 
 if __name__ == '__main__':
 
-    app.run(host="0.0.0.0",port=7002,debug=True)
+    app.run(host="0.0.0.0", port=7002, debug=True)
+
+
+
+
 
     send = {
         "hostname":"LJ888999",
