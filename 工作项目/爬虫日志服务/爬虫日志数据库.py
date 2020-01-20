@@ -76,51 +76,54 @@ class SaveLog():
 
     def saveData(self,data):
         print("表已创建,存储数据")
+        try:
+            sql =\
+            '''
+            insert into {tablename} values
+            (
+            0,
+            "{hostname}",
+            "{time}",
+            "{airname}",
+            "{dep}",
+            "{arr}",
+            "{date}",
+            "{currency}",
+            {adultnum},
+            {statucode},
+            {timing},
+            {resultnum},
+            "{ip}",
+            {port},
+            {timestamp},
+            '{message}'
+            );
+            
+            '''.format(
+                tablename = data["airname"],
+                hostname =  data["hostname"],
+                time = time.strftime("%Y-%m-%d %X"),
+                airname = data["airname"],
+                dep = data["dep"],
+                arr = data["arr"],
+                date = data["date"],
+                currency = data["currency"],
+                adultnum = data["adultnum"],
+                statucode = data["statucode"],
+                timing = data["timing"],
+                resultnum = data["resultnum"],
+                ip = data["ip"],
+                port = data["port"],
+                timestamp = time.time(),
+                message = data["message"]
+            )
 
-        sql =\
-        '''
-        insert into {tablename} values
-        (
-        0,
-        "{hostname}",
-        "{time}",
-        "{airname}",
-        "{dep}",
-        "{arr}",
-        "{date}",
-        "{currency}",
-        {adultnum},
-        {statucode},
-        {timing},
-        {resultnum},
-        "{ip}",
-        {port},
-        {timestamp},
-        """{message}"""
-        );
-        
-        '''.format(
-            tablename = data["airname"],
-            hostname =  data["hostname"],
-            time = time.strftime("%Y-%m-%d %X"),
-            airname = data["airname"],
-            dep = data["dep"],
-            arr = data["arr"],
-            date = data["date"],
-            currency = data["currency"],
-            adultnum = data["adultnum"],
-            statucode = data["statucode"],
-            timing = data["timing"],
-            resultnum = data["resultnum"],
-            ip = data["ip"],
-            port = data["port"],
-            timestamp = time.time(),
-            message = data["message"]
-        )
 
-
-        self.cursor.execute(sql)
-        self.conn.commit()
+            self.cursor.execute(sql)
+            self.conn.commit()
+        except Exception as e:
+            with open("except.txt","a") as f:
+                f.write(time.strftime("%Y-%m-%d %X")+"|"+traceback.format_exc())
 
 
 
