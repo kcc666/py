@@ -96,7 +96,7 @@ class SaveLog():
         "{ip}",
         {port},
         {timestamp},
-        "{message}"
+        """{message}"""
         );
         
         '''.format(
