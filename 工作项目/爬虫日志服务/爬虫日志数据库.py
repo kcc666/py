@@ -53,7 +53,7 @@ class SaveLog():
         '''根据名字建表'''
         self.cursor.execute(
             '''
-            create table Tway(
+            create table {}(
             id          int unsigned primary key auto_increment not null,
             hostname    varchar(30),
             time        datetime,
