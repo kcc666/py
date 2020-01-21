@@ -124,14 +124,33 @@ class SaveLog():
         except Exception as e:
             with open("except.txt","a") as f:
                 f.write('----------------------------------\n')
+                f.write(sql)
+                f.write('----------------------------------\n')
                 f.write(time.strftime("%Y-%m-%d %X")+"|"+traceback.format_exc())
+
+    # def getTablesName(self):
+    #     self.cursor.execute('''show tables;''')
+    #     result = self.cursor.fetchall()
+    #     return_result = []
+    #     for item in result:
+    #         return_result.append(item[0])
+    #     return return_result
+    #
+    # def getLog(self,msg):
+    #     param = json.loads(msg.decode("utf8"))
+    #     self.cursor.execute('''select * from {} where timestamp>{} and timestamp<{};'''
+    #                         .format(param["airname"],param["start"],param["end"]))
+    #
+    #
+    #
+    #     return self.cursor.fetchall()
 
 
 
 
 
 saver = SaveLog()
-
+# reader = ReadLog()
 
 app =  Flask(__name__)
 
@@ -144,7 +163,6 @@ def pushLog():
     msg = request.stream.read()
     saver.que.put(msg)
     return msg
-
 
 
 
