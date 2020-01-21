@@ -115,7 +115,7 @@ class SaveLog():
                 ip = data["ip"],
                 port = data["port"],
                 timestamp = time.time(),
-                message = data["message"]
+                message = pymysql.escape_string(data["message"])
             )
 
 
@@ -123,6 +123,7 @@ class SaveLog():
             self.conn.commit()
         except Exception as e:
             with open("except.txt","a") as f:
+                f.write('----------------------------------\n')
                 f.write(time.strftime("%Y-%m-%d %X")+"|"+traceback.format_exc())
 
 
