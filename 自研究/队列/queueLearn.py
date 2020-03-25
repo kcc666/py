@@ -1,5 +1,5 @@
 import random
-import queue
+import queue,time
 
 AirLineList = [
             "ICN-FUK", "ICN-HSG", "ICN-KIX", "ICN-KMJ", "ICN-NGO", "ICN-OIT", "ICN-OKA", "ICN-NRT",
@@ -47,10 +47,16 @@ AirLineList = [
 
 q = queue.Queue()
 q.put("0")
-q.put("1")
-q.put("2")
-q.put("3")
-q.put("4")
+q.put(1)
+q.put(True)
+q.put({"a":"bb"})
+q.put(["1",2])
 print(q.qsize())
-print(q.get())
+print(type(q.get()))
+print(type(q.get()))
+print(type(q.get()))
+print(type(q.get()))
+print(type(q.get()))
+print(type(q.get()))
+
 print(q.qsize())

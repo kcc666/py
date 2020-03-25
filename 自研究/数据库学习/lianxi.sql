@@ -84,3 +84,8 @@ select name from students where name rlike "周.*";
 
 -- 范围查询
 select name,age from students where age in (12,18,34);
+
+insert into Tway values(
+        0,
+        "LJ888999"
+        );
