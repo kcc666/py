@@ -42,6 +42,7 @@ capa["pageLoadStrategy"] = "none"
 
 driver = webdriver.Chrome(
     options=chrome_options,
+    # desired_capabilities=capa
     )
 # desired_capabilities=capa
 
@@ -58,8 +59,7 @@ driver.execute_cdp_cmd("Page.addScriptToEvaluateOnNewDocument", {
 driver.execute_cdp_cmd("Network.enable", {})
 driver.execute_cdp_cmd("Network.setExtraHTTPHeaders", {"headers": {"User-Agent": "Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/78.0.3904.87 Safari/537.36"}})
 
-driver.get("https://www.taobao.com")
-
+driver.get("https://www.cebupacificair.com/zh-cn")
 # # 设置浏览器窗口的位置和大小
 # driver.set_window_position(20, 40)
 # driver.set_window_size(1200, 800)
