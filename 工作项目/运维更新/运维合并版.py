@@ -3,6 +3,7 @@ import psutil
 import os
 import socket
 import requests
+from requests.exceptions import ConnectionError,ConnectTimeout
 import zipfile
 import threading
 import shutil
@@ -163,8 +164,9 @@ def 关闭程序(项目):
     subprocess.call('stop{}.bat'.format(项目), shell=True)
 
 def 开启程序(项目):
-    subprocess.call('start{}.exe'.format(项目), shell=True)
     if 项目=="cs":subprocess.call('start{}.bat'.format(项目), shell=True)
+    else:subprocess.call('start{}.exe'.format(项目), shell=True)
+
 
 def 覆盖文件(yuan,target):
     '''将一个目录下的全部文件和目录,完整地<拷贝并覆盖>到另一个目录'''
@@ -242,6 +244,8 @@ def 项目更新(信息,项目名):
                 删除文件(新版本存放地址.replace('.zip', ""), 新版本存放地址)
                 记录日志(信息["日志路径"], 信息["新版本号"], 信息["老版本号路径"])
             time.sleep(10)
+        except ConnectTimeout:
+            pass
         except Exception as e:
             with open("Error.txt","a")as f:
                 f.write(time.strftime("%Y-%m-%d %X")+"-{}-".format(项目名)+traceback.format_exc().replace("\n","AAAA")+"\n")
