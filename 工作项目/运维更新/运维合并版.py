@@ -187,7 +187,10 @@ def 覆盖文件(yuan,target):
         for f in a[2]:
             dep_path = os.path.join(a[0], f)
             arr_path = os.path.join(a[0].replace(yuan, target), f)
-            shutil.copy(dep_path, arr_path, follow_symlinks=True)
+            try:
+                shutil.copy(dep_path, arr_path, follow_symlinks=True)
+            except:
+                print('拷贝文件时错误:{} {}'.format(dep_path,arr_path))
 
 def 删除文件(目录,文件):
     shutil.rmtree(目录)
