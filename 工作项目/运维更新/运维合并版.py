@@ -3,7 +3,7 @@ import psutil
 import os
 import socket
 import requests
-from requests.exceptions import ConnectionError,ConnectTimeout
+from requests.exceptions import ConnectionError,ConnectTimeout,ReadTimeout
 import zipfile
 import threading
 import shutil
@@ -248,6 +248,8 @@ def 项目更新(信息,项目名):
                 记录日志(信息["日志路径"], 信息["新版本号"], 信息["老版本号路径"])
             time.sleep(10)
         except ConnectTimeout:
+            pass
+        except ReadTimeout:
             pass
         except Exception as e:
             with open("Error.txt","a")as f:
