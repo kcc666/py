@@ -3,6 +3,7 @@
 # author: kcc time:2020/5/26
 
 # import pywin32
+import traceback
 import os
 import win32gui
 import win32con
@@ -85,26 +86,30 @@ def 图片识别(imgname):
     return str(res)
 
 if __name__ == '__main__':
-    位置 = 获取位置()
 
-    点击(位置["日程"])
-    time.sleep(2)
+    try:
+        位置 = 获取位置()
 
-    点击(位置["竞技场"])
-    time.sleep(2)
-
-    while True:
-
-        i = str(random.randint(1,5))
-        点击(位置[f"挑战{i}"])
+        点击(位置["日程"])
         time.sleep(2)
 
-        点击(位置["自动"])
+        点击(位置["竞技场"])
         time.sleep(2)
 
-        判断战斗状态()
+        while True:
 
-        time.sleep(5)
+            i = str(random.randint(1,5))
+            点击(位置[f"挑战{i}"])
+            time.sleep(2)
 
+            点击(位置["自动"])
+            time.sleep(2)
+
+            判断战斗状态()
+
+            time.sleep(5)
+    except Exception as e:
+        print(traceback.format_exc())
+        input("\n\n\n\n\n程序错误,任意键请关闭.")
 
 #
