@@ -36,9 +36,6 @@ def 获取位置():
     }
 
     return 位置
-
-
-
 def 点击(目标):
     # 鼠标定位到(30,50)
     win32api.SetCursorPos(目标)
@@ -51,7 +48,6 @@ def 截图(位置,文件名):
     # 截图
     ImageGrab.grab(位置).save(f"{文件名}.png")
     # ImageGrab.grab(位置).show()
-
 def 判断战斗状态():
     cnt = 0
     while True:
@@ -67,8 +63,6 @@ def 判断战斗状态():
         else:
             print("非战斗状态,回合结束")
             break
-
-
 def 图片识别(imgname):
     APP_ID = '19321800'
     API_KEY = 'wk15MCS4Vzn7mL5CFcegLhrl'

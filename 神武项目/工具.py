@@ -1,4 +1,3 @@
-import requests
 import traceback
 import os
 import win32gui
@@ -12,66 +11,55 @@ import random
 
 
 # 窗口标题
-title = "神武4手游 - 浪淘沙"
+TITLE = "神武4手游 - 浪淘沙"
 
 # 图片识别接口认证码
 APP_ID = '19321800'
 API_KEY = 'wk15MCS4Vzn7mL5CFcegLhrl'
 SECRET_KEY = 'p7fRKr1MAZimZbq3NTgZCF6R90ym7a52'
 
-def 点击(目标):
+def 获取位置():
+    句柄 = win32gui.FindWindow(None, TITLE)
+    left, top, right, down = win32gui.GetWindowRect(句柄)
+
+    with open("坐标表.json","r",encoding="UTF8")as f:
+        pos_list = json.loads(f.read())
+
+    for i in pos_list:
+        if len(pos_list[i])==2:
+            pos_list[i] = (left + pos_list[i][0], top + pos_list[i][1])
+        else:
+            pos_list[i] = (left + pos_list[i][0], top + pos_list[i][1],left+pos_list[i][2],top+pos_list[i][3])
+
+    return pos_list
+
+def 点击(坐标):
+
     # 鼠标移动到目标
-    win32api.SetCursorPos(目标)
+    win32api.SetCursorPos(坐标)
+
     # 延迟0.5
     time.sleep(0.5)
+
 
     # 点击
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
 
-    # time.sleep(0.1)
-    # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
-
-def 获取位置():
-    # 获取窗口句柄
-    句柄 = win32gui.FindWindow(None,title)
-    left, top, right, down = win32gui.GetWindowRect(句柄)
-
-    位置 = {
-        "窗口":(left,top,right,down),
-        "装备":(left+177,top+298,left+361,top+328),
-        "烹饪":(left+174,top+340,left+366,top+374),
-        "草药丹药":(left+177,top+386,left+367,top+417),
-        "高品丹药":(left+178,top+431,left+366,top+461),
-        "古董":(left+179,top+476,left+366,top+506),
-        "购买": (left + 648, top + 666),
-        "n1":(left+547,top+229),
-        "n2":(left+794,top+232),
-        "n3":(left+541,top+331),
-        "n4":(left+796,top+325),
-        "n5":(left+526,top+411),
-        "n6":(left+785,top+410),
-        "n7":(left+545,top+494),
-        "n8":(left+789,top+497),
-        "n9":(left+537,top+582),
-        "n10":(left+787,top+587),
-    }
-
-    return 位置
-
-def 识别区域(位置):
+def 识别区域文字(区域坐标):
 
     # 根据传入位置截图并保存
-    ImageGrab.grab(位置).save(f"{位置}.png")
+    ImageGrab.grab(区域坐标).save(f"{区域坐标}.png")
+
 
     # 创建图片识别客户端
     client = AipOcr(APP_ID, API_KEY, SECRET_KEY)
 
     # 读取图片
-    with open(f"{位置}.png", 'rb') as fp:
+    with open(f"{区域坐标}.png", 'rb') as fp:
         img = fp.read()
 
     # 读完删除
-    os.remove(f"{位置}.png")
+    os.remove(f"{区域坐标}.png")
 
     # 开始图片识别
 
@@ -79,15 +67,13 @@ def 识别区域(位置):
         res = client.basicGeneral(img);
         if "limit" in str(res):continue
         else:
-            # # for i in res["words_result"]:
-            # #     print(i["words"])
-            # print(res)
-            # break
             return str(res)
 
-def 需求识别(位置):
-    # im = Image.open(f"{位置}.png")
-    im = ImageGrab.grab(位置)
+def 需求识别():
+    句柄 = win32gui.FindWindow(None, TITLE)
+    left, top, right, down = win32gui.GetWindowRect(句柄)
+    im = ImageGrab.grab((left,top,right,down))
+
     pix = im.load()
     pos = [
         {"基准点":(415,197),"需求":(445,197),"售罄":(414,222)},
@@ -126,22 +112,7 @@ def 需求识别(位置):
     return result
 
 
-
-
 if __name__ == '__main__':
-
-
+    # 获取位置()
     位置 = 获取位置()
-    # r = 需求识别(位置["窗口"])
-    # print(r)
-    # 点击(位置["n2"])
-    if "需求" in 识别区域(位置["草药丹药"]):
-        print("有需求")
-        列表 = 需求识别(位置["窗口"])
-        for i in 列表:
-            if 列表[i]:
-                点击(位置[i])
-                time.sleep(0.5)
-                点击(位置["购买"])
-    else:
-        print("无需求")
+    print(需求识别())
