@@ -52,7 +52,6 @@ def 截图(位置,文件名):
     ImageGrab.grab(位置).save(f"{文件名}.png")
     # ImageGrab.grab(位置).show()
 
-
 def 判断战斗状态():
     cnt = 0
     while True:
