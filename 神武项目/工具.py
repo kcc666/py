@@ -31,6 +31,7 @@ def 获取位置():
         else:
             pos_list[i] = (left + pos_list[i][0], top + pos_list[i][1],left+pos_list[i][2],top+pos_list[i][3])
 
+    pos_list["窗口"] = (left,top,right,down)
     return pos_list
 
 def 点击(坐标):
@@ -111,8 +112,11 @@ def 需求识别():
 
     return result
 
-
+def 截图(位置):
+    im = ImageGrab.grab(位置)
+    im.save(f"{位置}.png")
+    im.show()
 if __name__ == '__main__':
     # 获取位置()
     位置 = 获取位置()
-    print(需求识别())
+    print(截图(位置["窗口"]))
