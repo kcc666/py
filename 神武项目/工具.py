@@ -116,7 +116,41 @@ def 截图(位置):
     im = ImageGrab.grab(位置)
     im.save(f"{位置}.png")
     im.show()
+
+def 通关识别(日期):
+    句柄 = win32gui.FindWindow(None, TITLE)
+    left, top, right, down = win32gui.GetWindowRect(句柄)
+    im = ImageGrab.grab((left, top, right, down))
+
+    pix = im.load()
+
+    p = {
+        "周一-1":[190,536],
+        "周一-2":[353,595],
+        "周一-3":[349,427],
+        "周一-4":[587,568],
+        "周一-5":[721,435],
+    }
+
+    r = {
+        "t1":False,
+        "t2":False,
+        "t3":False,
+        "t4":False,
+        "t5":False,
+    }
+
+    for i in range(1,6):
+        key = p[f"{日期}-{i}"]
+        rgb = pix[key[0],key[1]]
+        print(rgb)
+        if rgb[2] < 5:
+            r[f"t{i}"] = True
+
+    print(r)
+
+
 if __name__ == '__main__':
     # 获取位置()
     位置 = 获取位置()
-    print(截图(位置["窗口"]))
+    通关识别("周一")
