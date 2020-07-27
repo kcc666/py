@@ -46,6 +46,15 @@ def 点击(坐标):
     # 点击
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
 
+def 周几():
+    if time.localtime().tm_wday == 0 :return "周一"
+    if time.localtime().tm_wday == 1 :return "周二"
+    if time.localtime().tm_wday == 2 :return "周三"
+    if time.localtime().tm_wday == 3 :return "周四"
+    if time.localtime().tm_wday == 4 :return "周五"
+    if time.localtime().tm_wday == 5 :return "周六"
+    if time.localtime().tm_wday == 6 :return "周日"
+
 def 识别区域文字(区域坐标):
 
     # 根据传入位置截图并保存
@@ -143,14 +152,31 @@ def 通关识别(日期):
     for i in range(1,6):
         key = p[f"{日期}-{i}"]
         rgb = pix[key[0],key[1]]
-        print(rgb)
         if rgb[2] < 5:
             r[f"t{i}"] = True
 
-    print(r)
+    return r
+
+def 判断战斗状态():
+    位置 = 获取位置()
+
+    while True:
+        res = 识别区域文字(位置["战斗状态"])
+        if "自" in res or "动" in res:
+            print("战斗状态")
+            time.sleep(5)
+        else:
+            print("非战斗状态")
+            break
+
+def 打印(*args):
+    for i in args:
+        t = time.strftime("%Y-%m-%d %H:%M:%S")
+        print(t,i)
+
 
 
 if __name__ == '__main__':
     # 获取位置()
-    位置 = 获取位置()
-    通关识别("周一")
+    pass
+    # 打印(1,2,"你好")
