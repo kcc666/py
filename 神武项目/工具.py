@@ -18,6 +18,12 @@ APP_ID = '19321800'
 API_KEY = 'wk15MCS4Vzn7mL5CFcegLhrl'
 SECRET_KEY = 'p7fRKr1MAZimZbq3NTgZCF6R90ym7a52'
 
+
+def 打印(*args):
+    for i in args:
+        t = time.strftime("%Y-%m-%d %H:%M:%S")
+        print(t,i)
+
 def 获取位置():
     句柄 = win32gui.FindWindow(None, TITLE)
     left, top, right, down = win32gui.GetWindowRect(句柄)
@@ -77,7 +83,12 @@ def 识别区域文字(区域坐标):
         res = client.basicGeneral(img);
         if "limit" in str(res):continue
         else:
-            return str(res)
+
+
+            r = ""
+            for i in res["words_result"]:
+                r += i["words"]+"\n"
+            return r
 
 def 需求识别():
     句柄 = win32gui.FindWindow(None, TITLE)
@@ -127,18 +138,32 @@ def 截图(位置):
     im.show()
 
 def 通关识别(日期):
+    '''
+    判断当前试练有几关未完成
+    :param 日期: 根据日期返回
+    :return: 返回1,2,3,4,5关的挑战状态
+    '''
+
+
     句柄 = win32gui.FindWindow(None, TITLE)
     left, top, right, down = win32gui.GetWindowRect(句柄)
     im = ImageGrab.grab((left, top, right, down))
 
     pix = im.load()
 
+
+    # 颜色判断基准点
     p = {
         "周一-1":[190,536],
         "周一-2":[353,595],
         "周一-3":[349,427],
         "周一-4":[587,568],
         "周一-5":[721,435],
+        "周二-1":[307,455],
+        "周二-2":[721,410],
+        "周二-3":[847,537],
+        "周二-4":[416,590],
+        "周二-5":[776,664],
     }
 
     r = {
@@ -163,20 +188,34 @@ def 判断战斗状态():
     while True:
         res = 识别区域文字(位置["战斗状态"])
         if "自" in res or "动" in res:
-            print("战斗状态")
+            打印("当前战斗状态")
             time.sleep(5)
         else:
-            print("非战斗状态")
+            打印("当前非战斗状态")
             break
 
-def 打印(*args):
-    for i in args:
-        t = time.strftime("%Y-%m-%d %H:%M:%S")
-        print(t,i)
+def 防掉线状态(t):
 
+    位置 = 获取位置()
 
+    cn = 1
+
+    while 1:
+        if t == time.strftime("%Y-%m-%d %H:%M"):
+            打印("已停止防掉线函数")
+            点击(位置["小地图"])
+            time.sleep(1)
+            break
+        else:
+            if cn!=2:
+                点击(位置["小地图"])
+                cn = 2
+            点击(位置["防掉线点1"])
+            time.sleep(3)
+            点击(位置["防掉线点2"])
+            time.sleep(3)
 
 if __name__ == '__main__':
-    # 获取位置()
-    pass
-    # 打印(1,2,"你好")
+    # 防掉线状态("2020-07-28 00:21")
+    位置 = 获取位置()
+    截图(位置["窗口"])
