@@ -20,7 +20,11 @@ def 竞技场():
         res = 工具.识别区域文字(位置["竞技场-剩余次数"])
         res = res.replace("\n","")
         工具.打印(f"竞技场剩余次数:{res}次")
-        if "0" in res:break
+
+        if len(res) == 0: 工具.打印("竞技场任务已完成"); break
+        if "0" in res:工具.打印("今天的竞技场次数已用完"); break
+
+
 
         s = f"竞技场-挑战{random.randint(1,4)}"
         工具.打印(f"点击{s}")
@@ -38,7 +42,7 @@ def 竞技场():
             工具.打印("战败,关闭提示")
             time.sleep(2)
 
-        if "1" in res :break
+
 
 if __name__ == '__main__':
     # 工具.防掉线状态("2020-07-28 07:10")
