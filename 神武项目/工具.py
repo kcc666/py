@@ -8,7 +8,7 @@ import time
 from aip import AipOcr
 import json
 import random
-
+import 坐标表
 
 # 窗口标题
 TITLE = "神武4手游 - 浪淘沙"
@@ -28,8 +28,8 @@ def 获取位置():
     句柄 = win32gui.FindWindow(None, TITLE)
     left, top, right, down = win32gui.GetWindowRect(句柄)
 
-    with open("坐标表.json","r",encoding="UTF8")as f:
-        pos_list = json.loads(f.read())
+
+    pos_list = 坐标表.p_list
 
     for i in pos_list:
         if len(pos_list[i])==2:
