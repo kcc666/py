@@ -64,7 +64,9 @@ def 周几():
 def 识别区域文字(区域坐标):
 
     # 根据传入位置截图并保存
-    ImageGrab.grab(区域坐标).save(f"{区域坐标}.png")
+    s = ImageGrab.grab(区域坐标)
+    s.save(f"{区域坐标}.png")
+    # s.show()
 
 
     # 创建图片识别客户端
@@ -81,6 +83,7 @@ def 识别区域文字(区域坐标):
 
     while True:
         res = client.basicGeneral(img);
+        # print(res)
         if "limit" in str(res) or "words_result" not in str(res):continue
         else:
             r = ""
@@ -223,7 +226,16 @@ def 防掉线状态(t):
             点击(位置["防掉线点2"])
             time.sleep(3)
 
+def 打开任务栏():
+
+    r = 识别区域文字(位置["任务"])
+
+    if "任务" not in r:点击(位置["任务展开按钮"]);time.sleep(1)
+
+
+
 if __name__ == '__main__':
     # 防掉线状态("2020-07-28 00:21")
     位置 = 获取位置()
-    截图(位置["窗口"])
+    # 打开任务栏()
+    打开任务栏()
