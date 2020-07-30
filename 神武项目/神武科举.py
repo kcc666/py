@@ -66,8 +66,11 @@ def 图片识别(imgname):
     os.remove(imgname+".png")
 
     res = client.basicGeneral(img);
-    if not res["words_result"]:
-        return "未识别到文字"
+
+    if "words_result" not in str(res):return "未识别到文字"
+    if not res["words_result"]:return "未识别到文字"
+
+
     for i in res["words_result"]:
         return i["words"].replace("“","").replace("”","")\
         .replace("《","").replace("》","")
@@ -75,14 +78,22 @@ def 图片识别(imgname):
 if __name__ == '__main__':
 
 
-    位置 = 获取位置()
-    截图(位置["问题"],"问题")
-    q = 图片识别("问题")
-    print(q)
+    current = ""
 
-    if q == "未识别到文字":
-        print("图片识别未识别到文字")
-    else:
-        print("正在查找答案")
-        问(q[:5])
+    while 1:
+        位置 = 获取位置()
+        截图(位置["问题"],"问题")
+        q = 图片识别("问题")
+        if q==current:
+            time.sleep(3)
+            continue
+        else:
+            current = q
+            print(q)
+
+            if q == "未识别到文字":
+                print("图片识别未识别到文字")
+            else:
+                print("正在查找答案")
+                问(q[:5])
 

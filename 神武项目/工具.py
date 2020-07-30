@@ -81,10 +81,8 @@ def 识别区域文字(区域坐标):
 
     while True:
         res = client.basicGeneral(img);
-        if "limit" in str(res):continue
+        if "limit" in str(res) or "words_result" not in str(res):continue
         else:
-
-
             r = ""
             for i in res["words_result"]:
                 r += i["words"]+"\n"
