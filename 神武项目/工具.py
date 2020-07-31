@@ -9,6 +9,7 @@ from aip import AipOcr
 import json
 import random
 import 坐标表
+import copy
 
 # 窗口标题
 TITLE = "神武4手游 - 浪淘沙"
@@ -29,7 +30,7 @@ def 获取位置():
     left, top, right, down = win32gui.GetWindowRect(句柄)
 
 
-    pos_list = 坐标表.p_list
+    pos_list = copy.copy(坐标表.p_list)
 
     for i in pos_list:
         if len(pos_list[i])==2:
@@ -42,15 +43,15 @@ def 获取位置():
 
 def 点击(坐标):
 
+
     # 鼠标移动到目标
     win32api.SetCursorPos(坐标)
-
     # 延迟0.5
     time.sleep(0.5)
-
-
     # 点击
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
+
+
 
 def 周几():
     if time.localtime().tm_wday == 0 :return "周一"
@@ -175,6 +176,11 @@ def 通关识别(日期):
         "周四-3": [531, 643],
         "周四-4": [738, 536],
         "周四-5": [313, 584],
+        "周五-1": [298, 181],
+        "周五-2": [660, 147],
+        "周五-3": [883, 209],
+        "周五-4": [256, 348],
+        "周五-5": [416, 422],
     }
 
     r = {
@@ -228,6 +234,9 @@ def 防掉线状态(t):
 
 def 打开任务栏():
 
+    位置 = 获取位置()
+
+    print(位置["任务"])
     r = 识别区域文字(位置["任务"])
 
     if "任务" not in r:点击(位置["任务展开按钮"]);time.sleep(1)
@@ -235,7 +244,10 @@ def 打开任务栏():
 
 
 if __name__ == '__main__':
-    # 防掉线状态("2020-07-28 00:21")
     位置 = 获取位置()
+
+    截图(位置['窗口'])
     # 打开任务栏()
-    打开任务栏()
+    # 防掉线状态()
+
+    # print(win32api.RGB(100,200,100))
