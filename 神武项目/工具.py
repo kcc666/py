@@ -51,8 +51,6 @@ def 点击(坐标):
     # 点击
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
 
-
-
 def 周几():
     if time.localtime().tm_wday == 0 :return "周一"
     if time.localtime().tm_wday == 1 :return "周二"
@@ -251,8 +249,9 @@ def 打开任务栏():
 if __name__ == '__main__':
     位置 = 获取位置()
 
-    截图(位置['窗口'])
+    # 截图(位置['窗口'])
     # 打开任务栏()
-    # 防掉线状态()
-
+    # 防掉线状态("2020-08-02 22:11")
+    r = 识别区域文字(位置["宝图-完成提示"])
+    print(r)
     # print(win32api.RGB(100,200,100))
