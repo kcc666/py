@@ -28,9 +28,18 @@ def 点击(目标):
     # 点击
     win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
 
+    # region 注释代码
+
     # time.sleep(0.1)
     # win32api.mouse_event(win32con.MOUSEEVENTF_LEFTUP | win32con.MOUSEEVENTF_LEFTDOWN, 0, 0, 0, 0)
 
+    # endregion
+
+
+
+
+
+    
 def 获取位置():
     # 获取窗口句柄
     句柄 = win32gui.FindWindow(None,title)
