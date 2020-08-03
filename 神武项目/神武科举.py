@@ -14,6 +14,9 @@ import random
 
 title = "神武4手游 - 浪淘沙"
 
+
+
+
 def 问(q):
 
     try:
@@ -75,16 +78,14 @@ def 图片识别(imgname):
         return i["words"].replace("“","").replace("”","")\
         .replace("《","").replace("》","")
 
-if __name__ == '__main__':
-
-
+def 开始科举():
     current = ""
 
     while 1:
         位置 = 获取位置()
-        截图(位置["问题"],"问题")
+        截图(位置["问题"], "问题")
         q = 图片识别("问题")
-        if q==current:
+        if q == current:
             time.sleep(3)
             continue
         else:
@@ -97,3 +98,6 @@ if __name__ == '__main__':
                 print("正在查找答案")
                 问(q[:5])
 
+
+if __name__ == '__main__':
+    开始科举()
