@@ -2,8 +2,8 @@ import 神武宝图,神武竞技场,神武试炼,time,工具
 
 
 def 开始全自动(t):
-    工具.防掉线状态(t)
-    time.sleep(10)
+    # 工具.防掉线状态(t)
+    # time.sleep(10)
 
     神武试炼.英雄试练()
     time.sleep(10)
