@@ -6,7 +6,7 @@ win = Tk() #声明一个根窗口
 win.title("DirectSpider 维护工具")
 
 #设置窗口大小
-win.geometry("600x380+100+100")
+win.geometry("300x380+800+300")
 
 #设置一个可变的变量
 
